@@ -1,108 +1,113 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head><meta charset="utf-8"/><link rel="stylesheet" type="text/css" href="index.css"/><title>Timetable Creator</title></head>
+<head>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" type="text/css" href="index.css"/>
+  <link rel="icon" href="favicon.ico"/>
+  <title>Timetable Creator</title>
+</head>
 <body>
-  
-  <div id="windowStart" class="windowStart">
-    <table class="center" style="height: 860px; width: 560px">
-      <tr style="height: 10%">
+  <!-- START WINDOW -->
+  <div id="windowStart" class="b-frame p-center-a s-large">
+    <table class="p-center s-big">
+      <tr class="h-10">
         <td>
-          <button id="buttonCreate" class="fill">Создать</button>
+          <button id="buttonCreate" class="b-element s-fill">Создать</button>
         </td>
       </tr>
-      <tr style="height: 10%">
+      <tr class="h-10">
         <td>
           <center>или</center>
         </td>
       </tr>
-      <tr style="height: 70%">
+      <tr class="h-70">
         <td>
-          <div class="fill" style="background-color: var(--color-dark) ">
-            <textarea id="inputJson" class="textJson center" style="background-color: var(--color-dark)" placeholder="Расписание (JSON)"></textarea>
+          <div class="b-element s-fill">
+            <textarea id="inputJson" class="b-element p-center s-95 c-code box" placeholder="Расписание (JSON)"></textarea>
           </div>
         </td>
       </tr>
-      <tr style="height: 10%">
+      <tr class="h-10">
         <td>
-          <button id="buttonOpen" class="fill">Открыть</button>
+          <button id="buttonOpen" class="b-element s-fill">Открыть</button>
         </td>
       </tr>
     </table>
   </div>
-  
-  <div id="windowMain" class="windowMain">
-    <div id="frameNavigation" class="frameNavigation">
-      <table class="fill">
+  <!-- MAIN WINDOW -->
+  <div id="windowMain" class="p-null s-fill hide">
+    <!-- NAVIGATION -->
+    <div id="frameNavigation" class="b-black p-null h-10 w-100 box">
+      <table class="s-fill">
         <tr>
-          <td style="width: 20%"></td>
-          <td style="width: 60%; padding-bottom: 32px">
-            <table class="fill" style="background-color: var(--color-light)">
+          <td class="w-20"></td>
+          <td class="w-60 c-nav-bar">
+            <table class="b-light s-fill">
               <tr>
-                <td style="width: 25%">
-                  <button id="buttonOpenTimes" class="buttonNavigation fill">Время</button>
+                <td class="w-25">
+                  <button id="buttonOpenTimes" class="b-light s-fill c-nav-button">Время</button>
                 </td>
-                <td style="width: 25%">
-                  <button id="buttonOpenLessons" class="buttonNavigation fill">Предметы</button>
+                <td class="w-25">
+                  <button id="buttonOpenLessons" class="b-light s-fill c-nav-button">Предметы</button>
                 </td>
-                <td style="width: 25%">
-                  <button id="buttonOpenTimetable" class="buttonNavigation fill">Расписание</button>
+                <td class="w-25">
+                  <button id="buttonOpenTimetable" class="b-light s-fill c-nav-button">Расписание</button>
                 </td>
-                <td style="width: 25%">
-                  <button id="buttonOpenJson" class="buttonNavigation fill">JSON</button>
+                <td class="w-25">
+                  <button id="buttonOpenJson" class="b-light s-fill c-nav-button">JSON</button>
                 </td>
               </tr>
             </table>
           </td>
-          <td style="width: 20%"></td>
+          <td class="w-20"></td>
         </tr>
       </table>
     </div>
-    
-    
-    <div id="windowTimes" class="windowPage">
-      <div class="windowFrame">
-        <table class="center" style="height: 90%; width: 90%">
-          <tr style="height: 10%">
-            <td style="width: 45%; font-size: 16px; text-align: center ">
+    <!-- WINDOW: Times -->
+    <div id="windowTimes" class="p-null-10 h-90 w-100 box hide">
+      <div class="b-frame p-center s-normal">
+        <table class="p-center s-90">
+          <tr class="h-10">
+            <td class="w-45 c-center c-t-small">
               Кол-во предметов в день:
-              <input id="inputTimes" style="width: 90%; margin-inline: 5%" type="number" step="1" min="1" max="48" />
+              <input id="inputTimes" class="b-element w-90 c-center c-margin-in5" type="number" step="1" min="1" max="48" />
             </td>
-            <td style="width: 45%; font-size: 16px; text-align: center">
+            <td class="w-45 c-center c-t-small">
               Номер первого предмета:
-              <input id="inputInitialIndex" style="width: 90%; margin-inline: 5%" type="number" step="1" />
+              <input id="inputInitialIndex" class="b-element w-90 c-center c-margin-in5" type="number" step="1" />
             </td>
           </tr>
-          <tr style="height: 10%">
+          <tr class="h-10">
             <td colspan="2">
-              <table class="frameTimes fill" border="1">
-                <tr class="frameTimes">
-                  <td class="frameTimes" style="width: 20%; text-align: center">Номер</td>
-                  <td class="frameTimes" style="width: 20%; text-align: center">Час</td>
-                  <td class="frameTimes" style="width: 20%; text-align: center">Минута</td>
-                  <td class="frameTimes" style="width: 20%; text-align: center">Час</td>
-                  <td class="frameTimes" style="width: 20%; text-align: center">Минута</td>
+              <table class="s-fill c-t-border" border="1">
+                <tr class="c-t-border">
+                  <td class="c-t-border w-20 c-center">Номер</td>
+                  <td class="c-t-border w-20 c-center">Час</td>
+                  <td class="c-t-border w-20 c-center">Минута</td>
+                  <td class="c-t-border w-20 c-center">Час</td>
+                  <td class="c-t-border w-20 c-center">Минута</td>
                 </tr>
               </table>
             </td>
           </tr>
-          <tr style="height: 80%">
+          <tr class="h-80">
             <td colspan="2">
-              <table id="frameTimes" class="frameTimes fill" border="1">
-                <tr class="frameTimes">
-                  <td class="frameTimes" style="width: 20%">
-                    <div id="timesIndex0" style="text-align: center">0</div>
+              <table id="frameTimes" class="s-fill c-t-border" border="1">
+                <tr class="c-t-border">
+                  <td class="w-20 c-t-border">
+                    <div id="timesIndex0" class="c-center">0</div>
                   </td>
-                  <td class="frameTimes" style="width: 20%">
-                    <input id="startHour0" class="inputTimes" type="number" step="1" min="0" max="24" />
+                  <td class="w-20 c-t-border">
+                    <input id="startHour0" class="b-element p-center-h s-95 c-center box" type="number" step="1" min="0" max="24" />
                   </td>
-                  <td class="frameTimes" style="width: 20%">
-                    <input id="startMinute0" class="inputTimes" type="number" step="1" min="0" max="60" />
+                  <td class="w-20 c-t-border">
+                    <input id="startMinute0" class="b-element p-center-h s-95 c-center box" type="number" step="1" min="0" max="60" />
                   </td>
-                  <td class="frameTimes" style="width: 20%">
-                    <input id="endHour0" class="inputTimes" type="number" step="1" min="0" max="24" />
+                  <td class="w-20 c-t-border">
+                    <input id="endHour0" class="b-element p-center-h s-95 c-center box" type="number" step="1" min="0" max="24" />
                   </td>
-                  <td class="frameTimes" style="width: 20%">
-                    <input id="endMinute0" class="inputTimes" type="number" step="1" min="0" max="60" />
+                  <td class="w-20 c-t-border">
+                    <input id="endMinute0" class="b-element p-center-h s-95 c-center box" type="number" step="1" min="0" max="60" />
                   </td>
                 </tr>
               </table>
@@ -111,18 +116,22 @@
         </table>
       </div>
     </div>
-    
-    <div id="windowLessons" class="windowPage"></div>
-    
-    <div id="windowTimetable" class="windowPage"></div>
-    
-    <div id="windowJson" class="windowPage">
-      <div class="windowFrame">
-        <textarea id="textJson" class="textJson center" disabled="disabled"></textarea>
+    <!-- WINDOW: Lessons -->
+    <div id="windowLessons" class="p-null-10 h-90 w-100 box hide">
+
+    </div>
+    <!-- WINDOW: Timetable -->
+    <div id="windowTimetable" class="p-null-10 h-90 w-100 box hide">
+
+    </div>
+    <!-- WINDOW: Json -->
+    <div id="windowJson" class="p-null-10 h-90 w-100 box hide">
+      <div class="b-frame p-center s-normal">
+        <textarea id="textJson" class="b-frame p-center s-95 c-code box" disabled="disabled"></textarea>
       </div>
     </div>
   </div>
-  
-<script src="index.js"></script>
+  <!-- SCRIPT -->
+  <script src="index.js"></script>
 </body>
 </html>

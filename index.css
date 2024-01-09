@@ -1,128 +1,68 @@
 ﻿:root {
-    --color-dark: #101010;
-    --color-gray: #202020;
-    --color-light: #D2D2D2;
-    --color-yellow: #FBBC05;
+    --black: #000000;
+    --white: #FFFFFF;
+    --yellow: #FBBC05;
+    --red: #EA4335;
+    --green: #34A853;
+    --blue: #4285F4;
+    --dark: #101010;
+    --gray: #202020;
+    --light: #D2D2D2;
 }
 
 
 * {
     border-radius: 32px;
     border-width: 0px;
+    outline: none;
+    padding: 0;
     font-family: Roboto;
     font-size: 32px;
-    color: var(--color-light);
+    color: var(--light);
 }
-body {
-    background-color: var(--color-dark);
-}
-td {
-    padding: 0;
-}
-button {
-    background-color: var(--color-dark);
-}
-input {
-    background-color: var(--color-dark);
-    outline: none;
-}
-input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
-    display: none;
-}
-textarea {
-    background-color: var(--color-dark);
-    outline: none;
-    resize: none;
-}
+body { background-color: var(--dark) }
+textarea { resize: none }
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { display: none }
 
+.b-black   { background-color: var(--black) }
+.b-light   { background-color: var(--light) }
+.b-frame   { background-color: var(--gray) }
+.b-element { background-color: var(--dark) }
 
-.textJson {
-    background-color: var(--color-gray);
-    border-radius: 0;
-    font-family: 'Cascadia Mono';
-    font-size: 16px;
-    height: 95%;
-    width: 95%;
-}
-.frameNavigation {
-    background-color: #000000;
-    border-radius: 0px;
-    height: 10%;
-    width: 100%;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-}
-.buttonNavigation {
-    background-color: var(--color-light);
-    color: var(--color-dark);
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-}
-.frameTimes {
-    border: 2px solid var(--color-light);
-    border-collapse: collapse;
-}
-.inputTimes {
-    border-radius: 0;
-    position: relative;
-    left: 50%;
-    margin-right: -50%;
-    height: 95%;
-    width: 95%;
-    transform: translate(-50%, 0);
-    text-align: center;
-}
+.p-null     { position: fixed; top: 0px; left: 0px }
+.p-null-10  { position: fixed; top: 10%; left: 0px }
+.p-center   { position: relative; top: 50%; left: 50%; margin-right: -50%; transform: translate(-50%, -50%) }
+.p-center-h { position: relative; left: 50%; margin-right: -50%; transform: translate(-50%, 0) }
+.p-center-a { position: absolute; top: 50%; left: 50%; margin-right: -50%; transform: translate(-50%, -50%) }
 
+.s-fill   { border-collapse: collapse; height: 100%; width: 100% }
+.s-95     { height: 95%; width: 95% }
+.s-90     { height: 90%; width: 90% }
+.s-normal { height: 90%; width: 40% }
+.s-large  { height: 900px; width: 600px }
+.s-big    { height: 860px; width: 560px }
 
-.windowStart {
-    background-color: var(--color-gray);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    height: 900px;
-    width: 600px;
-    transform: translate(-50%, -50%);
-}
-.windowMain {
-    display: none;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    height: 100%;
-    width: 100%;
-}
-.windowPage {
-    display: none;
-    border-radius: 0px;
-    position: absolute;
-    top: 10%;
-    left: 0px;
-    height: 90%;
-    width: 100%;
-}
-.windowFrame {
-    background-color: var(--color-gray);
-    position: relative;
-    top: 50%;
-    left: 50%;
-    height: 90%;
-    width: 40%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-}
+.h-10  { height: 10% }
+.h-20  { height: 20% }
+.h-30  { height: 30% }
+.h-70  { height: 70% }
+.h-80  { height: 80% }
+.h-90  { height: 90% }
 
+.w-20  { width: 20% }
+.w-25  { width: 25% }
+.w-45  { width: 45% }
+.w-60  { width: 60% }
+.w-90  { width: 90% }
+.w-100 { width: 100% }
 
-.center {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-}
+.c-center     { text-align: center }
+.c-code       { font-family: 'Cascadia Mono'; font-size: 16px }
+.c-margin-in5 { margin-inline: 5% }
+.c-nav-bar    { padding-bottom: 32px }
+.c-nav-button { color: var(--dark); border-top-left-radius: 0px; border-top-right-radius: 0px }
+.c-t-border   { border: 2px solid var(--light); border-collapse: collapse }
+.c-t-small    { font-size: 16px }
 
-.fill {
-    border-collapse: collapse;
-    height: 100%;
-    width: 100%;
-}
+.box  { border-radius: 0 }
+.hide { display: none }

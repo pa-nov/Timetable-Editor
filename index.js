@@ -1,16 +1,10 @@
 ﻿const windows = ["Times", "Lessons", "Timetable", "Json"]
 
-buttonCreate.addEventListener("click", () => {
-    document.getElementById("windowStart").style.display = "none"
-    document.getElementById("windowMain").style.display = "block"
-    openWindow(0)
-})
+buttonCreate.addEventListener("click", () => { openCreator(0) })
 buttonOpen.addEventListener("click", () => {
     document.getElementById("textJson").value = document.getElementById("inputJson").value
     readJson()
-    document.getElementById("windowStart").style.display = "none"
-    document.getElementById("windowMain").style.display = "block"
-    openWindow(2)
+    openCreator(2)
 })
 
 buttonOpenTimes.addEventListener("click", () => { openWindow(0) })
@@ -21,6 +15,12 @@ buttonOpenJson.addEventListener("click", () => { openWindow(3) })
 inputTimes.addEventListener("change", () => { generateTimes() })
 inputInitialIndex.addEventListener("change", () => { generateTimes() })
 
+// Functions
+function openCreator(window) {
+    document.getElementById("windowStart").style.display = "none"
+    document.getElementById("windowMain").style.display = "block"
+    openWindow(window)
+}
 function openWindow(window) {
     generateJson()
     switch (window) {
@@ -40,11 +40,11 @@ function openWindow(window) {
     for (let i = 0; i < windows.length; i++) {
         if (i == window) {
             document.getElementById("window" + windows[i]).style.display = "block"
-            document.getElementById("buttonOpen" + windows[i]).style.backgroundColor = "var(--color-yellow)"
+            document.getElementById("buttonOpen" + windows[i]).style.backgroundColor = "var(--yellow)"
             
         } else {
             document.getElementById("window" + windows[i]).style.display = "none"
-            document.getElementById("buttonOpen" + windows[i]).style.backgroundColor = "var(--color-light)"
+            document.getElementById("buttonOpen" + windows[i]).style.backgroundColor = "var(--light)"
         }
     }
 }
@@ -79,6 +79,7 @@ function generateJson() {
 
     textJson.value = jsonString
 }
+
 function generateTimes() {
     inputTimes.value = limitNumberToRange(inputTimes.value, 1, 48)
     const times = inputTimes.value
@@ -92,7 +93,7 @@ function generateTimes() {
         }
         while (times > frameTimesTable.childElementCount) {
             const line     = document.createElement("tr")
-            line.className = "frameTimes"
+            line.className = "c-t-border"
 
             const columnsTag = ["timesIndex", "startHour", "startMinute", "endHour", "endMinute"]
             const columns    = [
@@ -105,13 +106,13 @@ function generateTimes() {
 
             const timesIndex     = document.createElement("div")
             timesIndex.id        = columnsTag[0] + frameTimesTable.childElementCount
-            timesIndex.style     = "text-align: center"
+            timesIndex.className = "c-center"
             timesIndex.innerText = frameTimesTable.childElementCount + parseInt(initialIndex)
             columns[0].appendChild(timesIndex)
             for (let i = 1; i < columns.length; i++) {
                 const input     = document.createElement("input")
                 input.id        = columnsTag[i] + frameTimesTable.childElementCount
-                input.className = "inputTimes"
+                input.className = "b-element p-center-h s-95 c-center box"
                 input.type      = "number"
                 input.step      = "1"
                 input.min       = "0"
@@ -119,8 +120,7 @@ function generateTimes() {
                 columns[i].appendChild(input)
             }
             for (let i = 0; i < columns.length; i++) {
-                columns[i].style.width = "20%"
-                columns[i].className   = "frameTimes"
+                columns[i].className = "w-20 c-t-border"
                 line.appendChild(columns[i])
             }
             frameTimesTable.appendChild(line)
@@ -143,6 +143,7 @@ function generateTimes() {
     return jsonTimes.slice(0, -1)
 }
 
+// Functions
 function limitNumberToRange(number, min, max) {
     return Math.min(max, Math.max(min, parseInt(0 + number)))
 }
