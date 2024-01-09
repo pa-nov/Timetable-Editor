@@ -1,0 +1,128 @@
+﻿:root {
+    --color-dark: #101010;
+    --color-gray: #202020;
+    --color-light: #D2D2D2;
+    --color-yellow: #FBBC05;
+}
+
+
+* {
+    border-radius: 32px;
+    border-width: 0px;
+    font-family: Roboto;
+    font-size: 32px;
+    color: var(--color-light);
+}
+body {
+    background-color: var(--color-dark);
+}
+td {
+    padding: 0;
+}
+button {
+    background-color: var(--color-dark);
+}
+input {
+    background-color: var(--color-dark);
+    outline: none;
+}
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    display: none;
+}
+textarea {
+    background-color: var(--color-dark);
+    outline: none;
+    resize: none;
+}
+
+
+.textJson {
+    background-color: var(--color-gray);
+    border-radius: 0;
+    font-family: 'Cascadia Mono';
+    font-size: 16px;
+    height: 95%;
+    width: 95%;
+}
+.frameNavigation {
+    background-color: #000000;
+    border-radius: 0px;
+    height: 10%;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+.buttonNavigation {
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+.frameTimes {
+    border: 2px solid var(--color-light);
+    border-collapse: collapse;
+}
+.inputTimes {
+    border-radius: 0;
+    position: relative;
+    left: 50%;
+    margin-right: -50%;
+    height: 95%;
+    width: 95%;
+    transform: translate(-50%, 0);
+    text-align: center;
+}
+
+
+.windowStart {
+    background-color: var(--color-gray);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 900px;
+    width: 600px;
+    transform: translate(-50%, -50%);
+}
+.windowMain {
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+}
+.windowPage {
+    display: none;
+    border-radius: 0px;
+    position: absolute;
+    top: 10%;
+    left: 0px;
+    height: 90%;
+    width: 100%;
+}
+.windowFrame {
+    background-color: var(--color-gray);
+    position: relative;
+    top: 50%;
+    left: 50%;
+    height: 90%;
+    width: 40%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.center {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.fill {
+    border-collapse: collapse;
+    height: 100%;
+    width: 100%;
+}
