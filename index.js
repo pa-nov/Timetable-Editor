@@ -1,10 +1,12 @@
 ﻿const windows = ["Times", "Lessons", "Timetable", "Json"]
 
-buttonCreate.addEventListener("click", () => { openCreator(0) })
+buttonCreate.addEventListener("click", () => {
+  openCreator(0)
+})
 buttonOpen.addEventListener("click", () => {
-    document.getElementById("textJson").value = document.getElementById("inputJson").value
-    readJson()
-    openCreator(2)
+  document.getElementById("textJson").value = document.getElementById("inputJson").value
+  readJson()
+  openCreator(2)
 })
 
 buttonOpenTimes.addEventListener("click", () => { openWindow(0) })
@@ -17,137 +19,139 @@ inputInitialIndex.addEventListener("change", () => { generateTimes() })
 
 // Functions
 function openCreator(window) {
-    document.getElementById("windowStart").style.display = "none"
-    document.getElementById("windowMain").style.display = "block"
-    openWindow(window)
+  document.getElementById("windowStart").style.display = "none"
+  document.getElementById("windowMain").style.display = "block"
+  openWindow(window)
 }
 function openWindow(window) {
-    generateJson()
-    switch (window) {
-        case 0: {
-            readJson()
-            break
-        }
-        case 1: {
-            readJson()
-            break
-        }
-        case 2: {
-            readJson()
-            break
-        }
+  generateJson()
+  switch (window) {
+    case 0: {
+      readJson()
+      break
     }
-    for (let i = 0; i < windows.length; i++) {
-        if (i == window) {
-            document.getElementById("window" + windows[i]).style.display = "block"
-            document.getElementById("buttonOpen" + windows[i]).style.backgroundColor = "var(--yellow)"
-            
-        } else {
-            document.getElementById("window" + windows[i]).style.display = "none"
-            document.getElementById("buttonOpen" + windows[i]).style.backgroundColor = "var(--light)"
-        }
+    case 1: {
+      readJson()
+      break
     }
-}
+    case 2: {
+      readJson()
+      break
+    }
+  }
+  for (let i = 0; i < windows.length; i++) {
+    if (i == window) {
+      document.getElementById(`window${windows[i]}`).style.display = "block"
+      document.getElementById(`buttonOpen${windows[i]}`).style.backgroundColor = "var(--yellow)"
 
+    } else {
+      document.getElementById(`window${windows[i]}`).style.display = "none"
+      document.getElementById(`buttonOpen${windows[i]}`).style.backgroundColor = "var(--light)"
+    }
+  }
+}
 function readJson() {
-    const jsonStringArray = textJson.value.split('": 0')
-    var jsonString = jsonStringArray[0]
-    for (let i = 1; i < jsonStringArray.length; i++) {
-        jsonString += '": '
-        if (jsonStringArray[i].substring(0, 1) == ",") { jsonString += "0" }
-        jsonString += jsonStringArray[i]
-    }
-    const jsonData = JSON.parse(jsonString)
+  const jsonData = JSON.parse(normalizeJson(textJson.value))
 
-    inputTimes.value = jsonData["times"].length
-    generateTimes()
-    for (let i = 0; i < inputTimes.value; i++) {
-        document.getElementById("startHour" + i).value   = jsonData["times"][i]["startHour"]
-        document.getElementById("startMinute" + i).value = jsonData["times"][i]["startMinute"]
-        document.getElementById("endHour" + i).value     = jsonData["times"][i]["endHour"]
-        document.getElementById("endMinute" + i).value   = jsonData["times"][i]["endMinute"]
-    }
-}
+  inputTimes.value = jsonData["times"].length
+  generateTimes()
+  for (let i = 0; i < inputTimes.value; i++) {
+    document.getElementById(`startHour.${i}`).value   = jsonData["times"][i]["startHour"]
+    document.getElementById(`startMinute.${i}`).value = jsonData["times"][i]["startMinute"]
+    document.getElementById(`endHour.${i}`).value     = jsonData["times"][i]["endHour"]
+    document.getElementById(`endMinute.${i}`).value   = jsonData["times"][i]["endMinute"]
+  }
 
-function generateJson() {
-    const jsonTimes = generateTimes()
-    var jsonLessons = "    []"
-    var jsonEven = "    []"
-    var jsonOdd = "    []"
+  //generateLessons()
 
-    var jsonString = `{\n  "times": [${jsonTimes}\n  ],\n  "lessons": [\n${jsonLessons}\n  ],\n  "even": [\n${jsonEven}\n  ],\n  "odd": [\n${jsonOdd}\n  ]\n}`
-
-    textJson.value = jsonString
+  //generateTimetable()
 }
 
 function generateTimes() {
-    inputTimes.value = limitNumberToRange(inputTimes.value, 1, 48)
-    const times = inputTimes.value
-    if (inputInitialIndex.value == "") { inputInitialIndex.value = 0 }
-    const initialIndex = inputInitialIndex.value
+  inputTimes.value = limitNumberToRange(inputTimes.value, 1, 48)
+  if (inputInitialIndex.value == "") { inputInitialIndex.value = 0 }
+  const times = inputTimes.value
+  const initialIndex = inputInitialIndex.value
 
-    const frameTimesTable = frameTimes.children[0]
-    if (times != frameTimesTable.childElementCount) {
-        while (times < frameTimesTable.childElementCount) {
-            frameTimesTable.lastChild.remove()
-        }
-        while (times > frameTimesTable.childElementCount) {
-            const line     = document.createElement("tr")
-            line.className = "c-t-border"
-
-            const columnsTag = ["timesIndex", "startHour", "startMinute", "endHour", "endMinute"]
-            const columns    = [
-                document.createElement("td"),
-                document.createElement("td"),
-                document.createElement("td"),
-                document.createElement("td"),
-                document.createElement("td")
-            ]
-
-            const timesIndex     = document.createElement("div")
-            timesIndex.id        = columnsTag[0] + frameTimesTable.childElementCount
-            timesIndex.className = "c-center"
-            timesIndex.innerText = frameTimesTable.childElementCount + parseInt(initialIndex)
-            columns[0].appendChild(timesIndex)
-            for (let i = 1; i < columns.length; i++) {
-                const input     = document.createElement("input")
-                input.id        = columnsTag[i] + frameTimesTable.childElementCount
-                input.className = "b-element p-center-h s-95 c-center box"
-                input.type      = "number"
-                input.step      = "1"
-                input.min       = "0"
-                input.max       = (i % 2 == 0) ? "60" : "24"
-                columns[i].appendChild(input)
-            }
-            for (let i = 0; i < columns.length; i++) {
-                columns[i].className = "w-20 c-t-border"
-                line.appendChild(columns[i])
-            }
-            frameTimesTable.appendChild(line)
-        }
+  if (times != frameTimes.childElementCount) {
+    while (times < frameTimes.childElementCount) {
+      frameTimes.lastChild.remove()
     }
-    if (initialIndex != document.getElementById("timesIndex0").innerText) {
-        for (let i = 0; i < times; i++) {
-            document.getElementById("timesIndex" + i).innerText = i + parseInt(initialIndex)
-        }
-    }
+    while (times > frameTimes.childElementCount) {
+      const lineNumber = frameTimes.childElementCount
 
-    var jsonTimes = ""
+      const line = document.createElement("tr")
+      frameTimes.appendChild(line)
+
+      const columnsTag = ["timesIndex", "startHour", "startMinute", "endHour", "endMinute"]
+      const columns = []
+      for (let i = 0; i < 5; i++) {
+        columns.push(document.createElement("td"))
+        line.appendChild(columns[i])
+      }
+
+      const timesIndex = document.createElement("div")
+      columns[0].appendChild(timesIndex)
+      timesIndex.id = `${columnsTag[0]}.${lineNumber}`
+      timesIndex.className = "cellTimes"
+      timesIndex.innerText = parseInt(initialIndex) + lineNumber
+
+      for (let i = 1; i < columns.length; i++) {
+        const input = document.createElement("input")
+        columns[i].appendChild(input)
+        input.id = `${columnsTag[i]}.${lineNumber}`
+        input.className = "cellTimes"
+        input.type = "number"
+        input.step = "1"
+        input.min = "0"
+        input.max = (i % 2 == 0) ? "60" : "24"
+        input.value = "0"
+      }
+    }
+  }
+  if (initialIndex != document.getElementById("timesIndex.0").innerText) {
     for (let i = 0; i < times; i++) {
-        const startHour   = getTwoDigitNumber(limitNumberToRange(document.getElementById("startHour" + i).value, 0, 24))
-        const startMinute = getTwoDigitNumber(limitNumberToRange(document.getElementById("startMinute" + i).value, 0, 60))
-        const endHour     = getTwoDigitNumber(limitNumberToRange(document.getElementById("endHour" + i).value, 0, 24))
-        const endMinute   = getTwoDigitNumber(limitNumberToRange(document.getElementById("endMinute" + i).value, 0, 60))
-        jsonTimes += `\n    { "startHour": ${startHour}, "startMinute": ${startMinute}, "endHour": ${endHour}, "endMinute": ${endMinute} },`
+      document.getElementById(`timesIndex.${i}`).innerText = parseInt(initialIndex) + i
     }
-    return jsonTimes.slice(0, -1)
+  }
+
+  let jsonTimes = ""
+  for (let i = 0; i < times; i++) {
+    const startHour   = getTwoDigitNumber(limitNumberToRange(document.getElementById(`startHour.${i}`).value, 0, 24))
+    const startMinute = getTwoDigitNumber(limitNumberToRange(document.getElementById(`startMinute.${i}`).value, 0, 60))
+    const endHour     = getTwoDigitNumber(limitNumberToRange(document.getElementById(`endHour.${i}`).value, 0, 24))
+    const endMinute   = getTwoDigitNumber(limitNumberToRange(document.getElementById(`endMinute.${i}`).value, 0, 60))
+    jsonTimes += `\n    { "startHour": ${startHour}, "startMinute": ${startMinute}, "endHour": ${endHour}, "endMinute": ${endMinute} },`
+  }
+  return jsonTimes.slice(0, -1)
+}
+function generateJson() {
+  const jsonTimes   = generateTimes()
+  const jsonLessons = "\n    []"
+  const jsonEven    = "\n    []"
+  const jsonOdd     = "\n    []"
+
+  const jsonString = `{\n  "times": [${jsonTimes}\n  ],\n  "lessons": [${jsonLessons}\n  ],\n  "even": [${jsonEven}\n  ],\n  "odd": [${jsonOdd}\n  ]\n}`
+  textJson.value = jsonString
 }
 
 // Functions
 function limitNumberToRange(number, min, max) {
-    return Math.min(max, Math.max(min, parseInt(0 + number)))
+  return Math.min(max, Math.max(min, parseInt(0 + number)))
 }
 function getTwoDigitNumber(number) {
-    if (number < 10) { return `0${number}` }
-    return number.toString()
+  if (number < 10) { return `0${number}` }
+  return number.toString()
+}
+function normalizeJson(string) {
+  const jsonStringArray = string.split('": 0')
+  let jsonString = jsonStringArray[0]
+  for (let i = 1; i < jsonStringArray.length; i++) {
+    jsonString += '": '
+    if (jsonStringArray[i].substring(0, 1) == ",") {
+      jsonString += "0"
+    }
+    jsonString += jsonStringArray[i]
+  }
+  return jsonString
 }
