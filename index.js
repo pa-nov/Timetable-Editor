@@ -56,10 +56,10 @@ function readJson() {
   inputTimes.value = jsonData["times"].length
   generateTimes()
   for (let i = 0; i < inputTimes.value; i++) {
-    document.getElementById(`startHour.${i}`).value   = jsonData["times"][i]["startHour"]
+    document.getElementById(`startHour.${i}`).value = jsonData["times"][i]["startHour"]
     document.getElementById(`startMinute.${i}`).value = jsonData["times"][i]["startMinute"]
-    document.getElementById(`endHour.${i}`).value     = jsonData["times"][i]["endHour"]
-    document.getElementById(`endMinute.${i}`).value   = jsonData["times"][i]["endMinute"]
+    document.getElementById(`endHour.${i}`).value = jsonData["times"][i]["endHour"]
+    document.getElementById(`endMinute.${i}`).value = jsonData["times"][i]["endMinute"]
   }
 
   //generateLessons()
@@ -117,19 +117,19 @@ function generateTimes() {
 
   let jsonTimes = ""
   for (let i = 0; i < times; i++) {
-    const startHour   = getTwoDigitNumber(limitNumberToRange(document.getElementById(`startHour.${i}`).value, 0, 24))
+    const startHour = getTwoDigitNumber(limitNumberToRange(document.getElementById(`startHour.${i}`).value, 0, 24))
     const startMinute = getTwoDigitNumber(limitNumberToRange(document.getElementById(`startMinute.${i}`).value, 0, 60))
-    const endHour     = getTwoDigitNumber(limitNumberToRange(document.getElementById(`endHour.${i}`).value, 0, 24))
-    const endMinute   = getTwoDigitNumber(limitNumberToRange(document.getElementById(`endMinute.${i}`).value, 0, 60))
+    const endHour = getTwoDigitNumber(limitNumberToRange(document.getElementById(`endHour.${i}`).value, 0, 24))
+    const endMinute = getTwoDigitNumber(limitNumberToRange(document.getElementById(`endMinute.${i}`).value, 0, 60))
     jsonTimes += `\n    { "startHour": ${startHour}, "startMinute": ${startMinute}, "endHour": ${endHour}, "endMinute": ${endMinute} },`
   }
   return jsonTimes.slice(0, -1)
 }
 function generateJson() {
-  const jsonTimes   = generateTimes()
+  const jsonTimes = generateTimes()
   const jsonLessons = "\n    []"
-  const jsonEven    = "\n    []"
-  const jsonOdd     = "\n    []"
+  const jsonEven = "\n    []"
+  const jsonOdd = "\n    []"
 
   const jsonString = `{\n  "times": [${jsonTimes}\n  ],\n  "lessons": [${jsonLessons}\n  ],\n  "even": [${jsonEven}\n  ],\n  "odd": [${jsonOdd}\n  ]\n}`
   textJson.value = jsonString
