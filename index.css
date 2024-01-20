@@ -53,6 +53,12 @@ textarea {
   width: 100%;
 }
 
+.cell {
+  border: 1px solid var(--light);
+  border-radius: 0;
+  text-align: center;
+}
+
 
 .windowStart {
   background-color: var(--gray);
@@ -153,11 +159,4 @@ textarea {
   width: 90%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
-}
-
-
-.cellTimes {
-  border: 1px solid var(--light);
-  border-radius: 0;
-  text-align: center;
 }

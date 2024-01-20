@@ -17,6 +17,8 @@ buttonOpenJson.addEventListener("click", () => { openWindow(3) })
 inputTimes.addEventListener("change", () => { generateTimes() })
 inputInitialIndex.addEventListener("change", () => { generateTimes() })
 
+buttonAddLesson.addEventListener("click", () => { addLesson() })
+
 // Functions
 function openCreator(window) {
   document.getElementById("windowStart").style.display = "none"
@@ -67,6 +69,55 @@ function readJson() {
   //generateTimetable()
 }
 
+function addLesson() {
+  const lineNumber = frameLessons.childElementCount
+
+  const line = document.createElement("tr")
+  frameLessons.appendChild(line)
+
+  const columnsTag = ["lessonID", "lessonTitle", "lessonRoom", "lessonTeacher", "lessonCopies", "lessonRemove"]
+  const columns = []
+  for (let i = 0; i < columnsTag.length; i++) {
+    columns.push(document.createElement("td"))
+    line.appendChild(columns[i])
+  }
+
+  const center = document.createElement("center")
+  columns[0].appendChild(center)
+  center.id = `${columnsTag[0]}.${lineNumber}`
+  center.className = "cell"
+  center.innerText = lineNumber
+
+  for (let i = 1; i < columns.length - 1; i++) {
+    const input = document.createElement("input")
+    columns[i].appendChild(input)
+    input.id = `${columnsTag[i]}.${lineNumber}`
+    input.className = "cell"
+  }
+
+  const button = document.createElement("button")
+  columns[columns.length - 1].appendChild(button)
+  button.id = `${columnsTag[columnsTag.length - 1]}.${lineNumber}`
+  button.className = "cell"
+  button.innerText = "X"
+  button.addEventListener("click", () => { removeLesson(lineNumber) })
+}
+function removeLesson(number) {
+  const linesCount = frameLessons.childElementCount
+  const columnsTag = ["lessonID", "lessonTitle", "lessonRoom", "lessonTeacher", "lessonCopies", "lessonRemove"]
+
+  frameLessons.children[number].remove()
+  for (let i = number + 1; i < linesCount; i++) {
+    document.getElementById(`lessonID.${i}`).innerHTML = i - 1
+    document.getElementById(`lessonRemove.${i}`).replaceWith(document.getElementById(`lessonRemove.${i}`).cloneNode(true))
+    document.getElementById(`lessonRemove.${i}`).addEventListener("click", () => { removeLesson(i - 1) })
+    
+    for (let e = 0; e < columnsTag.length; e++) {
+      document.getElementById(`${columnsTag[e]}.${i}`).id = `${columnsTag[e]}.${i - 1}`
+    }
+  }
+}
+
 function generateTimes() {
   inputTimes.value = limitNumberToRange(inputTimes.value, 1, 48)
   if (inputInitialIndex.value == "") { inputInitialIndex.value = 0 }
@@ -85,7 +136,7 @@ function generateTimes() {
 
       const columnsTag = ["timesIndex", "startHour", "startMinute", "endHour", "endMinute"]
       const columns = []
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < columnsTag.length; i++) {
         columns.push(document.createElement("td"))
         line.appendChild(columns[i])
       }
@@ -93,14 +144,14 @@ function generateTimes() {
       const timesIndex = document.createElement("div")
       columns[0].appendChild(timesIndex)
       timesIndex.id = `${columnsTag[0]}.${lineNumber}`
-      timesIndex.className = "cellTimes"
+      timesIndex.className = "cell"
       timesIndex.innerText = parseInt(initialIndex) + lineNumber
 
       for (let i = 1; i < columns.length; i++) {
         const input = document.createElement("input")
         columns[i].appendChild(input)
         input.id = `${columnsTag[i]}.${lineNumber}`
-        input.className = "cellTimes"
+        input.className = "cell"
         input.type = "number"
         input.step = "1"
         input.min = "0"
@@ -124,6 +175,9 @@ function generateTimes() {
     jsonTimes += `\n    { "startHour": ${startHour}, "startMinute": ${startMinute}, "endHour": ${endHour}, "endMinute": ${endMinute} },`
   }
   return jsonTimes.slice(0, -1)
+}
+function generateLessons() {
+
 }
 function generateJson() {
   const jsonTimes = generateTimes()

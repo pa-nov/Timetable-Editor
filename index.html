@@ -89,30 +89,20 @@
           <table style="width: 100%">
             <thead>
               <tr>
-                <th style="width: 20%; border: 2px solid var(--light)">Номер</th>
-                <th style="width: 20%; border: 2px solid var(--light)">Час</th>
-                <th style="width: 20%; border: 2px solid var(--light)">Минута</th>
-                <th style="width: 20%; border: 2px solid var(--light)">Час</th>
-                <th style="width: 20%; border: 2px solid var(--light)">Минута</th>
+                <th style="width: 20%; border: 2px solid var(--light); font-size: 24px">Номер</th>
+                <th style="width: 20%; border: 2px solid var(--light); font-size: 24px">Час</th>
+                <th style="width: 20%; border: 2px solid var(--light); font-size: 24px">Минута</th>
+                <th style="width: 20%; border: 2px solid var(--light); font-size: 24px">Час</th>
+                <th style="width: 20%; border: 2px solid var(--light); font-size: 24px">Минута</th>
               </tr>
             </thead>
             <tbody id="frameTimes">
               <tr>
-                <td>
-                  <div id="timesIndex.0" class="cellTimes">0</div>
-                </td>
-                <td>
-                  <input id="startHour.0" class="cellTimes" type="number" step="1" min="0" max="24" />
-                </td>
-                <td>
-                  <input id="startMinute.0" class="cellTimes" type="number" step="1" min="0" max="60" />
-                </td>
-                <td>
-                  <input id="endHour.0" class="cellTimes" type="number" step="1" min="0" max="24" />
-                </td>
-                <td>
-                  <input id="endMinute.0" class="cellTimes" type="number" step="1" min="0" max="60" />
-                </td>
+                <td><div id="timesIndex.0" class="cell">0</div></td>
+                <td><input id="startHour.0" class="cell" type="number" step="1" min="0" max="24" /></td>
+                <td><input id="startMinute.0" class="cell" type="number" step="1" min="0" max="60" /></td>
+                <td><input id="endHour.0" class="cell" type="number" step="1" min="0" max="24" /></td>
+                <td><input id="endMinute.0" class="cell" type="number" step="1" min="0" max="60" /></td>
               </tr>
             </tbody>
           </table>
@@ -121,8 +111,23 @@
     </div>
     <!-- WINDOW: Lessons -->
     <div id="windowLessons" class="viewMain" style="display: none">
-      <div class="windowNormal">
-        Lessons
+      <div class="windowWide">
+        <div class="frameInner">
+          <table style="width: 100%">
+            <thead>
+              <tr>
+                <th style="width: 5%; border: 2px solid var(--light); font-size: 24px">ID</th>
+                <th style="width: 30%; border: 2px solid var(--light); font-size: 24px">Название</th>
+                <th style="width: 10%; border: 2px solid var(--light); font-size: 24px">Кабинет</th>
+                <th style="width: 40%; border: 2px solid var(--light); font-size: 24px">Преподаватель</th>
+                <th style="width: 10%; border: 2px solid var(--light); font-size: 24px">Копии</th>
+                <th style="width: 5%; border: 2px solid var(--light); font-size: 24px"></th>
+              </tr>
+            </thead>
+            <tbody id="frameLessons"></tbody>
+          </table>
+          <div style="width: 100%"><button id="buttonAddLesson">+</button></div>
+        </div>
       </div>
     </div>
     <!-- WINDOW: Timetable -->
