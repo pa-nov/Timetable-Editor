@@ -31,22 +31,24 @@
   <!-- MAIN WINDOW -->
   <div id="windowMain" style="display: none">
     <!-- NAVIGATION -->
-    <table class="navigationPanel">
-      <tr>
-        <td style="width: 20%"></td>
-        <td style="width: 60%; padding-bottom: 32px">
-          <table class="navigationButton">
-            <tr>
-              <td style="width: 25%"><button id="buttonOpenTimes" class="navigationButton">Время</button></td>
-              <td style="width: 25%"><button id="buttonOpenLessons" class="navigationButton">Предметы</button></td>
-              <td style="width: 25%"><button id="buttonOpenTimetable" class="navigationButton">Расписание</button></td>
-              <td style="width: 25%"><button id="buttonOpenJson" class="navigationButton">JSON</button></td>
-            </tr>
-          </table>
-        </td>
-        <td style="width: 20%"></td>
-      </tr>
-    </table>
+    <div class="navigationPanel">
+      <table style="height: 100%; width: 100%">
+        <tr>
+          <td style="width: 20%"></td>
+          <td style="width: 60%; padding-bottom: 32px">
+            <table class="navigationButton">
+              <tr>
+                <td style="width: 25%"><button id="buttonOpenTimes" class="navigationButton">Время</button></td>
+                <td style="width: 25%"><button id="buttonOpenLessons" class="navigationButton">Предметы</button></td>
+                <td style="width: 25%"><button id="buttonOpenTimetable" class="navigationButton">Расписание</button></td>
+                <td style="width: 25%"><button id="buttonOpenJson" class="navigationButton">JSON</button></td>
+              </tr>
+            </table>
+          </td>
+          <td style="width: 20%"></td>
+        </tr>
+      </table>
+    </div>
     <!-- WINDOW: Times -->
     <div id="windowTimes" class="viewMain" style="display: none">
       <div class="windowNormal" style="width: 50%">
