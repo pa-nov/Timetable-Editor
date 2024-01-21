@@ -1,11 +1,11 @@
 ﻿const windows = ["Times", "Lessons", "Timetable", "Json"]
 
 buttonCreate.addEventListener("click", () => {
+  resizeTimetable()
   openCreator(0)
 })
 buttonOpen.addEventListener("click", () => {
-  textJson.value = inputJson.value
-  readJson()
+  readJson(inputJson.value)
   openCreator(2)
 })
 
@@ -25,26 +25,13 @@ function openCreator(window) {
   openWindow(window)
 }
 function openWindow(window) {
-  generateJson()
-  switch (window) {
-    case 0: {
-      readJson()
-      break
-    }
-    case 1: {
-      readJson()
-      break
-    }
-    case 2: {
-      readJson()
-      break
-    }
-    case 3: {
-      windowJson.style.display = "block"
-      textJson.style.height = "0"
-      textJson.style.height = `${textJson.scrollHeight}px`
-      break
-    }
+  if (window == 3) {
+    textJson.value = generateJson()
+    readJson(textJson.value)
+    windowJson.style.display = "block"
+    textJson.style.height = "0"
+    textJson.style.height = `${textJson.scrollHeight}px`
+    windowJson.style.display = "none"
   }
   for (let i = 0; i < windows.length; i++) {
     if (i == window) {
@@ -57,7 +44,8 @@ function openWindow(window) {
     }
   }
 }
-function readJson() {
+function readJson(jsonString) {
+  textJson.value = jsonString
   const jsonData = JSON.parse(normalizeJson(textJson.value))
 
   resizeTimes(jsonData["times"].length)
@@ -78,7 +66,20 @@ function readJson() {
     document.getElementById(`lessonCopies.${i}`).value = jsonData["lessons"][i][3]
   }
 
-  resizeTimetable()
+  for (week of ["Even", "Odd"]) {
+    for (let day = 0; day < 7; day++) {
+      for (let lesson = 0; lesson < frameTimetable.childElementCount - 2; lesson++) {
+        const lessonID = jsonData[week.toLowerCase()][day][lesson]
+        const lessonFrame = getLessonFrame(week, day, lesson)
+        lessonFrame.dataset.id = lessonID
+        if (lessonID > 0) {
+          lessonFrame.innerText = document.getElementById(`lessonTitle.${lessonID}`).value
+        } else {
+          lessonFrame.innerText = ""
+        }
+      }
+    }
+  }
 }
 
 // Times
@@ -120,6 +121,8 @@ function resizeTimes(number) {
       input.value = "0"
     }
   }
+
+  resizeTimetable()
 }
 function updateInitialIndex() {
   if (inputInitialIndex.value == "") {
@@ -183,10 +186,33 @@ function removeLesson(number) {
   const columnsTag = ["lessonID", "lessonTitle", "lessonRoom", "lessonTeacherSurname", "lessonTeacherName", "lessonTeacherMiddleName", "lessonCopies", "lessonRemove"]
 
   frameLessons.children[number].remove()
+  for (week of ["Even", "Odd"]) {
+    for (let day = 0; day < 7; day++) {
+      for (let lesson = 0; lesson < frameTimetable.childElementCount - 2; lesson++) {
+        const lessonFrame = getLessonFrame(week, day, lesson)
+        if (lessonFrame.dataset.id == number) {
+          lessonFrame.dataset.id = "0"
+          lessonFrame.innerText = ""
+        }
+      }
+    }
+  }
+
   for (let i = number + 1; i < linesCount; i++) {
     document.getElementById(`lessonID.${i}`).innerHTML = i - 1
     document.getElementById(`lessonRemove.${i}`).replaceWith(document.getElementById(`lessonRemove.${i}`).cloneNode(true))
     document.getElementById(`lessonRemove.${i}`).addEventListener("click", () => { removeLesson(i - 1) })
+    for (week of ["Even", "Odd"]) {
+      for (let day = 0; day < 7; day++) {
+        for (let lesson = 0; lesson < frameTimetable.childElementCount - 2; lesson++) {
+          const lessonFrame = getLessonFrame(week, day, lesson)
+          if (lessonFrame.dataset.id == i) {
+            lessonFrame.dataset.id = i - 1
+            lessonFrame.innerText = document.getElementById(`lessonTitle.${i}`).value
+          }
+        }
+      }
+    }
 
     for (let e = 0; e < columnsTag.length; e++) {
       document.getElementById(`${columnsTag[e]}.${i}`).id = `${columnsTag[e]}.${i - 1}`
@@ -211,11 +237,11 @@ function resizeTimetable() {
     header.innerText = parseInt(inputInitialIndex.value) + frameTimetable.childElementCount - 3
 
     for (let i = 0; i < 7; i++) {
-      const cellEven = document.createElement("td")
-      frameEven.children[i].appendChild(cellEven)
-
-      const cellOdd = document.createElement("td")
-      frameOdd.children[i].appendChild(cellOdd)
+      for (week of ["Even", "Odd"]) {
+        const cell = document.createElement("td")
+        document.getElementById(`frame${week}`).children[i].appendChild(cell)
+        cell.dataset.id = "0"
+      }
     }
   }
   for (let i = 2; i < frameTimetable.childElementCount; i++) {
@@ -241,6 +267,7 @@ function generateLessons() {
     const teacherSurname = document.getElementById(`lessonTeacherSurname.${i}`).value
     const teacherName = document.getElementById(`lessonTeacherName.${i}`).value
     const teacherMiddleName = document.getElementById(`lessonTeacherMiddleName.${i}`).value
+
     const lessonTitle = document.getElementById(`lessonTitle.${i}`).value
     const lessonRoom = document.getElementById(`lessonRoom.${i}`).value
     const lessonTeacher = `${teacherSurname}|${teacherName}|${teacherMiddleName}`
@@ -249,14 +276,28 @@ function generateLessons() {
   }
   return jsonLessons.slice(0, -1)
 }
+function generateTimetable(week) {
+  const lessons = frameTimetable.childElementCount - 2
+  let jsonTimetable = ""
+  for (let day = 0; day < 7; day++) {
+    jsonTimetable += "\n    ["
+    for (let lesson = 0; lesson < lessons; lesson++) {
+      jsonTimetable += ` ${getLessonFrame(week, day, lesson).dataset.id},`
+    }
+    if (lessons > 0) {
+      jsonTimetable = jsonTimetable.slice(0, -1)
+    }
+    jsonTimetable += " ],"
+  }
+  return jsonTimetable.slice(0, -1)
+}
 function generateJson() {
   const jsonTimes = generateTimes()
   const jsonLessons = generateLessons()
-  const jsonEven = "\n    []"
-  const jsonOdd = "\n    []"
+  const jsonEven = generateTimetable("Even")
+  const jsonOdd = generateTimetable("Odd")
 
-  const jsonString = `{\n  "times": [${jsonTimes}\n  ],\n  "lessons": [${jsonLessons}\n  ],\n  "even": [${jsonEven}\n  ],\n  "odd": [${jsonOdd}\n  ]\n}`
-  textJson.value = jsonString
+  return `{\n  "times": [${jsonTimes}\n  ],\n  "lessons": [${jsonLessons}\n  ],\n  "even": [${jsonEven}\n  ],\n  "odd": [${jsonOdd}\n  ]\n}`
 }
 
 // Functions
@@ -267,6 +308,8 @@ function getTwoDigitNumber(number) {
   if (number < 10) { return `0${number}` }
   return number.toString()
 }
+
+// Functions
 function normalizeJson(string) {
   const jsonStringArray = string.split('": 0')
   let jsonString = jsonStringArray[0]
@@ -278,4 +321,9 @@ function normalizeJson(string) {
     jsonString += jsonStringArray[i]
   }
   return jsonString
+}
+function getLessonFrame(week, day, lesson) {
+  const dayFrame = document.getElementById(`frame${week}`).children[day]
+  const lessonFrame = dayFrame.children[dayFrame.childElementCount - (frameTimetable.childElementCount - 2) + lesson]
+  return lessonFrame
 }
