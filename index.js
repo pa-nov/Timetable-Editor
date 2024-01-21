@@ -39,6 +39,12 @@ function openWindow(window) {
       readJson()
       break
     }
+    case 3: {
+      windowJson.style.display = "block"
+      textJson.style.height = "0"
+      textJson.style.height = `${textJson.scrollHeight}px`
+      break
+    }
   }
   for (let i = 0; i < windows.length; i++) {
     if (i == window) {

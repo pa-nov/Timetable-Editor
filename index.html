@@ -9,137 +9,122 @@
 <body>
   <!-- START WINDOW -->
   <div id="windowStart" class="windowStart">
-    <table class="frameStart">
+    <table class="frameThin">
       <tr style="height: 10%">
-        <td>
-          <button id="buttonCreate">Создать</button>
-        </td>
+        <td><button id="buttonCreate">Создать</button></td>
       </tr>
       <tr style="height: 10%">
-        <td>
-          <center>или</center>
-        </td>
+        <td><center>или</center></td>
       </tr>
       <tr style="height: 70%">
         <td>
-          <div class="frameFull">
+          <div class="frameThin" style="background-color: var(--dark)">
             <textarea id="inputJson" class="frameJson" placeholder="Расписание (JSON)"></textarea>
           </div>
         </td>
       </tr>
       <tr style="height: 10%">
-        <td>
-          <button id="buttonOpen">Открыть</button>
-        </td>
+        <td><button id="buttonOpen">Открыть</button></td>
       </tr>
     </table>
   </div>
   <!-- MAIN WINDOW -->
   <div id="windowMain" style="display: none">
     <!-- NAVIGATION -->
-    <div class="navigationPanel">
-      <table class="fill">
-        <tr>
-          <td style="width: 20%"></td>
-          <td style="width: 60%; padding-bottom: 32px">
-            <table class="fill" style="background-color: var(--light)">
-              <tr>
-                <td style="width: 25%">
-                  <button id="buttonOpenTimes" class="navigationButton">Время</button>
-                </td>
-                <td style="width: 25%">
-                  <button id="buttonOpenLessons" class="navigationButton">Предметы</button>
-                </td>
-                <td style="width: 25%">
-                  <button id="buttonOpenTimetable" class="navigationButton">Расписание</button>
-                </td>
-                <td style="width: 25%">
-                  <button id="buttonOpenJson" class="navigationButton">JSON</button>
-                </td>
-              </tr>
-            </table>
-          </td>
-          <td style="width: 20%"></td>
-        </tr>
-      </table>
-    </div>
+    <table class="navigationPanel">
+      <tr>
+        <td style="width: 20%"></td>
+        <td style="width: 60%; padding-bottom: 32px">
+          <table style="background-color: var(--light); height: 100%; width: 100%">
+            <tr>
+              <td style="width: 25%"><button id="buttonOpenTimes" class="navigationButton">Время</button></td>
+              <td style="width: 25%"><button id="buttonOpenLessons" class="navigationButton">Предметы</button></td>
+              <td style="width: 25%"><button id="buttonOpenTimetable" class="navigationButton">Расписание</button></td>
+              <td style="width: 25%"><button id="buttonOpenJson" class="navigationButton">JSON</button></td>
+            </tr>
+          </table>
+        </td>
+        <td style="width: 20%"></td>
+      </tr>
+    </table>
     <!-- WINDOW: Times -->
     <div id="windowTimes" class="viewMain" style="display: none">
-      <div class="windowNormal">
-        <div class="frameInner">
-          <table style="width: 100%">
-            <thead>
-              <tr>
-                <th style="width: 50%">Кол-во предметов:</th>
-                <th style="width: 50%">Первый предмет:</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <input id="inputTimes" type="number" step="1" min="1" max="48" />
-                </td>
-                <td>
-                  <input id="inputInitialIndex" type="number" step="1" value="0" />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <br />
-          <table style="width: 100%">
-            <thead>
-              <tr>
-                <th style="width: 20%; border: 2px solid var(--light); font-size: 24px">Номер</th>
-                <th style="width: 20%; border: 2px solid var(--light); font-size: 24px">Час</th>
-                <th style="width: 20%; border: 2px solid var(--light); font-size: 24px">Минута</th>
-                <th style="width: 20%; border: 2px solid var(--light); font-size: 24px">Час</th>
-                <th style="width: 20%; border: 2px solid var(--light); font-size: 24px">Минута</th>
-              </tr>
-            </thead>
-            <tbody id="frameTimes">
-              <tr>
-                <td><div id="timesIndex.0" class="cell">0</div></td>
-                <td><input id="startHour.0" class="cell" type="number" step="1" min="0" max="24" /></td>
-                <td><input id="startMinute.0" class="cell" type="number" step="1" min="0" max="60" /></td>
-                <td><input id="endHour.0" class="cell" type="number" step="1" min="0" max="24" /></td>
-                <td><input id="endMinute.0" class="cell" type="number" step="1" min="0" max="60" /></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="windowNormal" style="width: 40%">
+        <table style="width: 100%">
+          <thead>
+            <tr>
+              <th style="width: 50%">Кол-во предметов:</th>
+              <th style="width: 50%">Первый предмет:</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input id="inputTimes" type="number" step="1" min="1" max="48" /></td>
+              <td><input id="inputInitialIndex" type="number" step="1" value="0" /></td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <table style="width: 100%">
+          <thead>
+            <tr>
+              <th style="width: 20%; border: 2px solid var(--light); font-size: 24px">Номер</th>
+              <th style="width: 20%; border: 2px solid var(--light); font-size: 24px">Час</th>
+              <th style="width: 20%; border: 2px solid var(--light); font-size: 24px">Минута</th>
+              <th style="width: 20%; border: 2px solid var(--light); font-size: 24px">Час</th>
+              <th style="width: 20%; border: 2px solid var(--light); font-size: 24px">Минута</th>
+            </tr>
+          </thead>
+          <tbody id="frameTimes">
+            <tr>
+              <td><div id="timesIndex.0" class="cell">0</div></td>
+              <td><input id="startHour.0" class="cell" type="number" step="1" min="0" max="24" /></td>
+              <td><input id="startMinute.0" class="cell" type="number" step="1" min="0" max="60" /></td>
+              <td><input id="endHour.0" class="cell" type="number" step="1" min="0" max="24" /></td>
+              <td><input id="endMinute.0" class="cell" type="number" step="1" min="0" max="60" /></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
     <!-- WINDOW: Lessons -->
     <div id="windowLessons" class="viewMain" style="display: none">
-      <div class="windowWide">
-        <div class="frameInner">
-          <table style="width: 100%">
-            <thead>
-              <tr>
-                <th style="width: 5%; border: 2px solid var(--light); font-size: 24px">ID</th>
-                <th style="width: 30%; border: 2px solid var(--light); font-size: 24px">Название</th>
-                <th style="width: 10%; border: 2px solid var(--light); font-size: 24px">Кабинет</th>
-                <th style="width: 40%; border: 2px solid var(--light); font-size: 24px">Преподаватель</th>
-                <th style="width: 10%; border: 2px solid var(--light); font-size: 24px">Копии</th>
-                <th style="width: 5%; border: 2px solid var(--light); font-size: 24px"></th>
-              </tr>
-            </thead>
-            <tbody id="frameLessons"></tbody>
-          </table>
-          <div style="width: 100%"><button id="buttonAddLesson">+</button></div>
-        </div>
+      <div class="windowNormal" style="width: 70%">
+        <table style="width: 100%">
+          <thead>
+            <tr>
+              <th style="width: 05%; border: 2px solid var(--light); font-size: 24px">ID</th>
+              <th style="width: 30%; border: 2px solid var(--light); font-size: 24px">Название</th>
+              <th style="width: 10%; border: 2px solid var(--light); font-size: 24px">Кабинет</th>
+              <th style="width: 40%; border: 2px solid var(--light); font-size: 24px">Преподаватель</th>
+              <th style="width: 10%; border: 2px solid var(--light); font-size: 24px">Копии</th>
+              <th style="width: 05%; border: 2px solid var(--light); font-size: 24px"></th>
+            </tr>
+          </thead>
+          <tbody id="frameLessons">
+            <tr>
+              <td><div class="cell">0</div></td>
+              <td><input id="lessonTitle.0" class="cell" disabled="disabled" value="Null" /></td>
+              <td><input id="lessonRoom.0" class="cell" disabled="disabled" value="0" /></td>
+              <td><input id="lessonTeacher.0" class="cell" disabled="disabled" value="Null|Null|Null" /></td>
+              <td><input id="lessonCopies.0" class="cell" disabled="disabled" value="0|0" /></td>
+              <td><div class="cell">!</div></td>
+            </tr>
+          </tbody>
+        </table>
+        <button id="buttonAddLesson">+</button>
       </div>
     </div>
     <!-- WINDOW: Timetable -->
     <div id="windowTimetable" class="viewMain" style="display: none">
-      <div class="windowWide">
+      <div class="windowNormal" style="width: 70%">
         Timetable
       </div>
     </div>
     <!-- WINDOW: Json -->
     <div id="windowJson" class="viewMain" style="display: none">
-      <div class="windowNormal">
-        <textarea id="textJson" class="frameJson" disabled="disabled"></textarea>
+      <div class="windowNormal" style="width: 40%">
+        <textarea id="textJson" class="frameJson" style="vertical-align: top; overflow: hidden" disabled="disabled"></textarea>
       </div>
     </div>
   </div>
