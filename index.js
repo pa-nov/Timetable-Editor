@@ -74,7 +74,9 @@ function readJson() {
   for (let i = 0; i < frameLessons.childElementCount; i++) {
     document.getElementById(`lessonTitle.${i}`).value = jsonData["lessons"][i][0]
     document.getElementById(`lessonRoom.${i}`).value = jsonData["lessons"][i][1]
-    document.getElementById(`lessonTeacher.${i}`).value = jsonData["lessons"][i][2]
+    document.getElementById(`lessonTeacherSurname.${i}`).value = jsonData["lessons"][i][2].split("|")[0]
+    document.getElementById(`lessonTeacherName.${i}`).value = jsonData["lessons"][i][2].split("|")[1]
+    document.getElementById(`lessonTeacherMiddleName.${i}`).value = jsonData["lessons"][i][2].split("|")[2]
     document.getElementById(`lessonCopies.${i}`).value = jsonData["lessons"][i][3]
   }
 
@@ -139,7 +141,7 @@ function addLesson() {
   const line = document.createElement("tr")
   frameLessons.appendChild(line)
 
-  const columnsTag = ["lessonID", "lessonTitle", "lessonRoom", "lessonTeacher", "lessonCopies", "lessonRemove"]
+  const columnsTag = ["lessonID", "lessonTitle", "lessonRoom", "lessonTeacherSurname", "lessonTeacherName", "lessonTeacherMiddleName", "lessonCopies", "lessonRemove"]
   const columns = []
   for (let i = 0; i < columnsTag.length; i++) {
     columns.push(document.createElement("td"))
@@ -169,7 +171,7 @@ function addLesson() {
 function removeLesson(number) {
   const linesCount = frameLessons.childElementCount
 
-  const columnsTag = ["lessonID", "lessonTitle", "lessonRoom", "lessonTeacher", "lessonCopies", "lessonRemove"]
+  const columnsTag = ["lessonID", "lessonTitle", "lessonRoom", "lessonTeacherSurname", "lessonTeacherName", "lessonTeacherMiddleName", "lessonCopies", "lessonRemove"]
 
   frameLessons.children[number].remove()
   for (let i = number + 1; i < linesCount; i++) {
@@ -198,9 +200,12 @@ function generateTimes() {
 function generateLessons() {
   let jsonLessons = ""
   for (let i = 0; i < frameLessons.childElementCount; i++) {
+    const teacherSurname = document.getElementById(`lessonTeacherSurname.${i}`).value
+    const teacherName = document.getElementById(`lessonTeacherName.${i}`).value
+    const teacherMiddleName = document.getElementById(`lessonTeacherMiddleName.${i}`).value
     const lessonTitle = document.getElementById(`lessonTitle.${i}`).value
     const lessonRoom = document.getElementById(`lessonRoom.${i}`).value
-    const lessonTeacher = document.getElementById(`lessonTeacher.${i}`).value
+    const lessonTeacher = `${teacherSurname}|${teacherName}|${teacherMiddleName}`
     const lessonCopies = document.getElementById(`lessonCopies.${i}`).value
     jsonLessons += `\n    [ "${lessonTitle}", "${lessonRoom}", "${lessonTeacher}", "${lessonCopies}" ],`
   }

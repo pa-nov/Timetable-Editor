@@ -96,7 +96,9 @@
               <th style="width: 05%; border: 2px solid var(--light); font-size: 24px">ID</th>
               <th style="width: 30%; border: 2px solid var(--light); font-size: 24px">Название</th>
               <th style="width: 10%; border: 2px solid var(--light); font-size: 24px">Кабинет</th>
-              <th style="width: 40%; border: 2px solid var(--light); font-size: 24px">Преподаватель</th>
+              <th style="width: 15%; border: 2px solid var(--light); font-size: 24px">Фамилия</th>
+              <th style="width: 10%; border: 2px solid var(--light); font-size: 24px">Имя</th>
+              <th style="width: 15%; border: 2px solid var(--light); font-size: 24px">Отчество</th>
               <th style="width: 10%; border: 2px solid var(--light); font-size: 24px">Копии</th>
               <th style="width: 05%; border: 2px solid var(--light); font-size: 24px"></th>
             </tr>
@@ -106,7 +108,9 @@
               <td><div class="cell">0</div></td>
               <td><input id="lessonTitle.0" class="cell" disabled="disabled" value="Null" /></td>
               <td><input id="lessonRoom.0" class="cell" disabled="disabled" value="0" /></td>
-              <td><input id="lessonTeacher.0" class="cell" disabled="disabled" value="Null|Null|Null" /></td>
+              <td><input id="lessonTeacherSurname.0" class="cell" disabled="disabled" value="Null" /></td>
+              <td><input id="lessonTeacherName.0" class="cell" disabled="disabled" value="Null" /></td>
+              <td><input id="lessonTeacherMiddleName.0" class="cell" disabled="disabled" value="Null" /></td>
               <td><input id="lessonCopies.0" class="cell" disabled="disabled" value="0|0" /></td>
               <td><div class="cell">!</div></td>
             </tr>
@@ -123,7 +127,7 @@
     </div>
     <!-- WINDOW: Json -->
     <div id="windowJson" class="viewMain" style="display: none">
-      <div class="windowNormal" style="width: 40%">
+      <div class="windowNormal" style="width: 50%">
         <textarea id="textJson" class="frameJson" style="vertical-align: top; overflow: hidden" disabled="disabled"></textarea>
       </div>
     </div>
