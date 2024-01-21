@@ -80,40 +80,38 @@ function resizeTimes() {
   inputTimes.value = limitNumberToRange(inputTimes.value, 1, 48)
   const times = inputTimes.value
 
-  if (times != frameTimes.childElementCount) {
-    while (times < frameTimes.childElementCount) {
-      frameTimes.lastChild.remove()
+  while (times < frameTimes.childElementCount) {
+    frameTimes.lastChild.remove()
+  }
+  while (times > frameTimes.childElementCount) {
+    const lineNumber = frameTimes.childElementCount
+
+    const line = document.createElement("tr")
+    frameTimes.appendChild(line)
+
+    const columnsTag = ["timesIndex", "startHour", "startMinute", "endHour", "endMinute"]
+    const columns = []
+    for (let i = 0; i < columnsTag.length; i++) {
+      columns.push(document.createElement("td"))
+      line.appendChild(columns[i])
     }
-    while (times > frameTimes.childElementCount) {
-      const lineNumber = frameTimes.childElementCount
 
-      const line = document.createElement("tr")
-      frameTimes.appendChild(line)
+    const timesIndex = document.createElement("div")
+    columns[0].appendChild(timesIndex)
+    timesIndex.id = `${columnsTag[0]}.${lineNumber}`
+    timesIndex.className = "cell"
+    timesIndex.innerText = parseInt(inputInitialIndex.value) + lineNumber
 
-      const columnsTag = ["timesIndex", "startHour", "startMinute", "endHour", "endMinute"]
-      const columns = []
-      for (let i = 0; i < columnsTag.length; i++) {
-        columns.push(document.createElement("td"))
-        line.appendChild(columns[i])
-      }
-
-      const timesIndex = document.createElement("div")
-      columns[0].appendChild(timesIndex)
-      timesIndex.id = `${columnsTag[0]}.${lineNumber}`
-      timesIndex.className = "cell"
-      timesIndex.innerText = parseInt(inputInitialIndex.value) + lineNumber
-
-      for (let i = 1; i < columns.length; i++) {
-        const input = document.createElement("input")
-        columns[i].appendChild(input)
-        input.id = `${columnsTag[i]}.${lineNumber}`
-        input.className = "cell"
-        input.type = "number"
-        input.step = "1"
-        input.min = "0"
-        input.max = (i % 2 == 0) ? "60" : "24"
-        input.value = "0"
-      }
+    for (let i = 1; i < columns.length; i++) {
+      const input = document.createElement("input")
+      columns[i].appendChild(input)
+      input.id = `${columnsTag[i]}.${lineNumber}`
+      input.className = "cell"
+      input.type = "number"
+      input.step = "1"
+      input.min = "0"
+      input.max = (i % 2 == 0) ? "60" : "24"
+      input.value = "0"
     }
   }
 }
@@ -182,7 +180,7 @@ function removeLesson(number) {
 // Json
 function generateTimes() {
   let jsonTimes = ""
-  for (let i = 0; i < inputTimes.value; i++) {
+  for (let i = 0; i < frameTimes.childElementCount; i++) {
     const startHour = getTwoDigitNumber(limitNumberToRange(document.getElementById(`startHour.${i}`).value, 0, 24))
     const startMinute = getTwoDigitNumber(limitNumberToRange(document.getElementById(`startMinute.${i}`).value, 0, 60))
     const endHour = getTwoDigitNumber(limitNumberToRange(document.getElementById(`endHour.${i}`).value, 0, 24))
