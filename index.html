@@ -49,7 +49,7 @@
     </table>
     <!-- WINDOW: Times -->
     <div id="windowTimes" class="viewMain" style="display: none">
-      <div class="windowNormal" style="width: 40%">
+      <div class="windowNormal" style="width: 50%">
         <table style="width: 100%">
           <thead>
             <tr>
@@ -59,7 +59,7 @@
           </thead>
           <tbody>
             <tr>
-              <td><input id="inputTimes" type="number" step="1" min="1" max="48" /></td>
+              <td><input id="inputTimes" type="number" step="1" min="1" max="24" /></td>
               <td><input id="inputInitialIndex" type="number" step="1" value="0" /></td>
             </tr>
           </tbody>
@@ -89,7 +89,7 @@
     </div>
     <!-- WINDOW: Lessons -->
     <div id="windowLessons" class="viewMain" style="display: none">
-      <div class="windowNormal" style="width: 70%">
+      <div class="windowNormal" style="width: 80%">
         <table style="width: 100%">
           <thead>
             <tr>
@@ -121,8 +121,39 @@
     </div>
     <!-- WINDOW: Timetable -->
     <div id="windowTimetable" class="viewMain" style="display: none">
-      <div class="windowNormal" style="width: 70%">
-        Timetable
+      <div class="windowNormal" style="width: 80%">
+        <table class="cellTable" style="width: 100%">
+          <thead>
+            <tr id="frameTimetable">
+              <th style="width: 05%"></th>
+              <th style="width: 05%"></th>
+            </tr>
+          </thead>
+          <tbody id="frameEven">
+            <tr>
+              <th style="writing-mode:vertical-rl; text-orientation: upright" rowspan="7"><div>Чётная</div></th>
+              <th>Пн</th>
+            </tr>
+            <tr><th>Вт</th></tr>
+            <tr><th>Ср</th></tr>
+            <tr><th>Чт</th></tr>
+            <tr><th>Пт</th></tr>
+            <tr><th>Сб</th></tr>
+            <tr><th>Вс</th></tr>
+          </tbody>
+          <tbody id="frameOdd">
+            <tr>
+              <th style="writing-mode:vertical-rl; text-orientation: upright" rowspan="7"><div>Нечётная</div></th>
+              <th>Пн</th>
+            </tr>
+            <tr><th>Вт</th></tr>
+            <tr><th>Ср</th></tr>
+            <tr><th>Чт</th></tr>
+            <tr><th>Пт</th></tr>
+            <tr><th>Сб</th></tr>
+            <tr><th>Вс</th></tr>
+          </tbody>
+        </table>
       </div>
     </div>
     <!-- WINDOW: Json -->

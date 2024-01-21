@@ -80,12 +80,12 @@ function readJson() {
     document.getElementById(`lessonCopies.${i}`).value = jsonData["lessons"][i][3]
   }
 
-  //generateTimetable()
+  resizeTimetable()
 }
 
 // Times
 function resizeTimes() {
-  inputTimes.value = limitNumberToRange(inputTimes.value, 1, 48)
+  inputTimes.value = limitNumberToRange(inputTimes.value, 1, 24)
   const times = inputTimes.value
 
   while (times < frameTimes.childElementCount) {
@@ -130,6 +130,9 @@ function updateInitialIndex() {
   if (inputInitialIndex.value != document.getElementById("timesIndex.0").innerText) {
     for (let i = 0; i < inputTimes.value; i++) {
       document.getElementById(`timesIndex.${i}`).innerText = parseInt(inputInitialIndex.value) + i
+    }
+    for (let i = 2; i < frameTimetable.childElementCount; i++) {
+      frameTimetable.children[i].innerText = parseInt(inputInitialIndex.value) + i - 2
     }
   }
 }
@@ -182,6 +185,37 @@ function removeLesson(number) {
     for (let e = 0; e < columnsTag.length; e++) {
       document.getElementById(`${columnsTag[e]}.${i}`).id = `${columnsTag[e]}.${i - 1}`
     }
+  }
+}
+
+// Timetable
+function resizeTimetable() {
+  const times = inputTimes.value
+
+  while (times < frameTimetable.childElementCount - 2) {
+    frameTimetable.lastChild.remove()
+
+    for (let i = 0; i < 7; i++) {
+      frameEven.children[i].lastChild.remove()
+
+      frameOdd.children[i].lastChild.remove()
+    }
+  }
+  while (times > frameTimetable.childElementCount - 2) {
+    const header = document.createElement("th")
+    frameTimetable.appendChild(header)
+    header.innerText = parseInt(inputInitialIndex.value) + frameTimetable.childElementCount - 3
+
+    for (let i = 0; i < 7; i++) {
+      const cellEven = document.createElement("td")
+      frameEven.children[i].appendChild(cellEven)
+
+      const cellOdd = document.createElement("td")
+      frameOdd.children[i].appendChild(cellOdd)
+    }
+  }
+  for (let i = 2; i < frameTimetable.childElementCount; i++) {
+    frameTimetable.children[i].style.width = `${90 / times}%`
   }
 }
 

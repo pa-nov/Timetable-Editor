@@ -54,6 +54,18 @@ textarea {
   text-align: center;
 }
 
+.cellTable th {
+  border: 2px solid var(--light);
+  border-radius: 0;
+  text-align: center;
+}
+
+.cellTable td {
+  border: 1px solid var(--light);
+  border-radius: 0;
+  text-align: center;
+  height: 96px;
+}
 
 .windowStart {
   background-color: var(--gray);
