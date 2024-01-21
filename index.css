@@ -108,6 +108,8 @@ textarea {
   color: var(--dark);
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+  border-bottom-left-radius: 512px;
+  border-bottom-right-radius: 512px;
 }
 
 
