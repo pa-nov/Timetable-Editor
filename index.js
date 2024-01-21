@@ -4,7 +4,7 @@ buttonCreate.addEventListener("click", () => {
   openCreator(0)
 })
 buttonOpen.addEventListener("click", () => {
-  document.getElementById("textJson").value = document.getElementById("inputJson").value
+  textJson.value = inputJson.value
   readJson()
   openCreator(2)
 })
@@ -14,7 +14,7 @@ buttonOpenLessons.addEventListener("click", () => { openWindow(1) })
 buttonOpenTimetable.addEventListener("click", () => { openWindow(2) })
 buttonOpenJson.addEventListener("click", () => { openWindow(3) })
 
-inputTimes.addEventListener("change", () => { resizeTimes() })
+inputTimes.addEventListener("change", () => { resizeTimes(inputTimes.value) })
 inputInitialIndex.addEventListener("change", () => { updateInitialIndex() })
 buttonAddLesson.addEventListener("click", () => { addLesson() })
 
@@ -60,8 +60,7 @@ function openWindow(window) {
 function readJson() {
   const jsonData = JSON.parse(normalizeJson(textJson.value))
 
-  inputTimes.value = jsonData["times"].length
-  resizeTimes()
+  resizeTimes(jsonData["times"].length)
   for (let i = 0; i < inputTimes.value; i++) {
     document.getElementById(`startHour.${i}`).value = jsonData["times"][i]["startHour"]
     document.getElementById(`startMinute.${i}`).value = jsonData["times"][i]["startMinute"]
@@ -69,8 +68,7 @@ function readJson() {
     document.getElementById(`endMinute.${i}`).value = jsonData["times"][i]["endMinute"]
   }
 
-  while (jsonData["lessons"].length < frameLessons.childElementCount) { removeLesson(frameLessons.childElementCount - 1) }
-  while (jsonData["lessons"].length > frameLessons.childElementCount) { addLesson() }
+  resizeLessons(jsonData["lessons"].length)
   for (let i = 0; i < frameLessons.childElementCount; i++) {
     document.getElementById(`lessonTitle.${i}`).value = jsonData["lessons"][i][0]
     document.getElementById(`lessonRoom.${i}`).value = jsonData["lessons"][i][1]
@@ -84,8 +82,8 @@ function readJson() {
 }
 
 // Times
-function resizeTimes() {
-  inputTimes.value = limitNumberToRange(inputTimes.value, 1, 24)
+function resizeTimes(number) {
+  inputTimes.value = limitNumberToRange(number, 1, 24)
   const times = inputTimes.value
 
   while (times < frameTimes.childElementCount) {
@@ -138,6 +136,14 @@ function updateInitialIndex() {
 }
 
 // Lessons
+function resizeLessons(number) {
+  while (number < frameLessons.childElementCount) {
+    removeLesson(frameLessons.childElementCount - 1)
+  }
+  while (number > frameLessons.childElementCount) {
+    addLesson()
+  }
+}
 function addLesson() {
   const lineNumber = frameLessons.childElementCount
 
@@ -194,10 +200,8 @@ function resizeTimetable() {
 
   while (times < frameTimetable.childElementCount - 2) {
     frameTimetable.lastChild.remove()
-
     for (let i = 0; i < 7; i++) {
       frameEven.children[i].lastChild.remove()
-
       frameOdd.children[i].lastChild.remove()
     }
   }
