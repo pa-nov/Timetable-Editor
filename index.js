@@ -14,9 +14,8 @@ buttonOpenLessons.addEventListener("click", () => { openWindow(1) })
 buttonOpenTimetable.addEventListener("click", () => { openWindow(2) })
 buttonOpenJson.addEventListener("click", () => { openWindow(3) })
 
-inputTimes.addEventListener("change", () => { generateTimes() })
-inputInitialIndex.addEventListener("change", () => { generateTimes() })
-
+inputTimes.addEventListener("change", () => { resizeTimes() })
+inputInitialIndex.addEventListener("change", () => { updateInitialIndex() })
 buttonAddLesson.addEventListener("click", () => { addLesson() })
 
 // Functions
@@ -56,7 +55,7 @@ function readJson() {
   const jsonData = JSON.parse(normalizeJson(textJson.value))
 
   inputTimes.value = jsonData["times"].length
-  generateTimes()
+  resizeTimes()
   for (let i = 0; i < inputTimes.value; i++) {
     document.getElementById(`startHour.${i}`).value = jsonData["times"][i]["startHour"]
     document.getElementById(`startMinute.${i}`).value = jsonData["times"][i]["startMinute"]
@@ -64,65 +63,22 @@ function readJson() {
     document.getElementById(`endMinute.${i}`).value = jsonData["times"][i]["endMinute"]
   }
 
-  //generateLessons()
+  while (jsonData["lessons"].length < frameLessons.childElementCount) { removeLesson(frameLessons.childElementCount - 1) }
+  while (jsonData["lessons"].length > frameLessons.childElementCount) { addLesson() }
+  for (let i = 0; i < frameLessons.childElementCount; i++) {
+    document.getElementById(`lessonTitle.${i}`).value = jsonData["lessons"][i][0]
+    document.getElementById(`lessonRoom.${i}`).value = jsonData["lessons"][i][1]
+    document.getElementById(`lessonTeacher.${i}`).value = jsonData["lessons"][i][2]
+    document.getElementById(`lessonCopies.${i}`).value = jsonData["lessons"][i][3]
+  }
 
   //generateTimetable()
 }
 
-function addLesson() {
-  const lineNumber = frameLessons.childElementCount
-
-  const line = document.createElement("tr")
-  frameLessons.appendChild(line)
-
-  const columnsTag = ["lessonID", "lessonTitle", "lessonRoom", "lessonTeacher", "lessonCopies", "lessonRemove"]
-  const columns = []
-  for (let i = 0; i < columnsTag.length; i++) {
-    columns.push(document.createElement("td"))
-    line.appendChild(columns[i])
-  }
-
-  const center = document.createElement("center")
-  columns[0].appendChild(center)
-  center.id = `${columnsTag[0]}.${lineNumber}`
-  center.className = "cell"
-  center.innerText = lineNumber
-
-  for (let i = 1; i < columns.length - 1; i++) {
-    const input = document.createElement("input")
-    columns[i].appendChild(input)
-    input.id = `${columnsTag[i]}.${lineNumber}`
-    input.className = "cell"
-  }
-
-  const button = document.createElement("button")
-  columns[columns.length - 1].appendChild(button)
-  button.id = `${columnsTag[columnsTag.length - 1]}.${lineNumber}`
-  button.className = "cell"
-  button.innerText = "X"
-  button.addEventListener("click", () => { removeLesson(lineNumber) })
-}
-function removeLesson(number) {
-  const linesCount = frameLessons.childElementCount
-  const columnsTag = ["lessonID", "lessonTitle", "lessonRoom", "lessonTeacher", "lessonCopies", "lessonRemove"]
-
-  frameLessons.children[number].remove()
-  for (let i = number + 1; i < linesCount; i++) {
-    document.getElementById(`lessonID.${i}`).innerHTML = i - 1
-    document.getElementById(`lessonRemove.${i}`).replaceWith(document.getElementById(`lessonRemove.${i}`).cloneNode(true))
-    document.getElementById(`lessonRemove.${i}`).addEventListener("click", () => { removeLesson(i - 1) })
-    
-    for (let e = 0; e < columnsTag.length; e++) {
-      document.getElementById(`${columnsTag[e]}.${i}`).id = `${columnsTag[e]}.${i - 1}`
-    }
-  }
-}
-
-function generateTimes() {
+// Times
+function resizeTimes() {
   inputTimes.value = limitNumberToRange(inputTimes.value, 1, 48)
-  if (inputInitialIndex.value == "") { inputInitialIndex.value = 0 }
   const times = inputTimes.value
-  const initialIndex = inputInitialIndex.value
 
   if (times != frameTimes.childElementCount) {
     while (times < frameTimes.childElementCount) {
@@ -145,7 +101,7 @@ function generateTimes() {
       columns[0].appendChild(timesIndex)
       timesIndex.id = `${columnsTag[0]}.${lineNumber}`
       timesIndex.className = "cell"
-      timesIndex.innerText = parseInt(initialIndex) + lineNumber
+      timesIndex.innerText = parseInt(inputInitialIndex.value) + lineNumber
 
       for (let i = 1; i < columns.length; i++) {
         const input = document.createElement("input")
@@ -160,14 +116,73 @@ function generateTimes() {
       }
     }
   }
-  if (initialIndex != document.getElementById("timesIndex.0").innerText) {
-    for (let i = 0; i < times; i++) {
-      document.getElementById(`timesIndex.${i}`).innerText = parseInt(initialIndex) + i
+}
+function updateInitialIndex() {
+  if (inputInitialIndex.value == "") {
+    inputInitialIndex.value = 0
+  }
+  if (inputInitialIndex.value != document.getElementById("timesIndex.0").innerText) {
+    for (let i = 0; i < inputTimes.value; i++) {
+      document.getElementById(`timesIndex.${i}`).innerText = parseInt(inputInitialIndex.value) + i
     }
   }
+}
 
+// Lessons
+function addLesson() {
+  const lineNumber = frameLessons.childElementCount
+
+  const line = document.createElement("tr")
+  frameLessons.appendChild(line)
+
+  const columnsTag = ["lessonID", "lessonTitle", "lessonRoom", "lessonTeacher", "lessonCopies", "lessonRemove"]
+  const columns = []
+  for (let i = 0; i < columnsTag.length; i++) {
+    columns.push(document.createElement("td"))
+    line.appendChild(columns[i])
+  }
+
+  const lessonID = document.createElement("div")
+  columns[0].appendChild(lessonID)
+  lessonID.id = `${columnsTag[0]}.${lineNumber}`
+  lessonID.className = "cell"
+  lessonID.innerText = lineNumber
+
+  for (let i = 1; i < columns.length - 1; i++) {
+    const input = document.createElement("input")
+    columns[i].appendChild(input)
+    input.id = `${columnsTag[i]}.${lineNumber}`
+    input.className = "cell"
+  }
+
+  const lessonRemove = document.createElement("button")
+  columns[columns.length - 1].appendChild(lessonRemove)
+  lessonRemove.id = `${columnsTag[columnsTag.length - 1]}.${lineNumber}`
+  lessonRemove.className = "cell"
+  lessonRemove.innerText = "X"
+  lessonRemove.addEventListener("click", () => { removeLesson(lineNumber) })
+}
+function removeLesson(number) {
+  const linesCount = frameLessons.childElementCount
+
+  const columnsTag = ["lessonID", "lessonTitle", "lessonRoom", "lessonTeacher", "lessonCopies", "lessonRemove"]
+
+  frameLessons.children[number].remove()
+  for (let i = number + 1; i < linesCount; i++) {
+    document.getElementById(`lessonID.${i}`).innerHTML = i - 1
+    document.getElementById(`lessonRemove.${i}`).replaceWith(document.getElementById(`lessonRemove.${i}`).cloneNode(true))
+    document.getElementById(`lessonRemove.${i}`).addEventListener("click", () => { removeLesson(i - 1) })
+
+    for (let e = 0; e < columnsTag.length; e++) {
+      document.getElementById(`${columnsTag[e]}.${i}`).id = `${columnsTag[e]}.${i - 1}`
+    }
+  }
+}
+
+// Json
+function generateTimes() {
   let jsonTimes = ""
-  for (let i = 0; i < times; i++) {
+  for (let i = 0; i < inputTimes.value; i++) {
     const startHour = getTwoDigitNumber(limitNumberToRange(document.getElementById(`startHour.${i}`).value, 0, 24))
     const startMinute = getTwoDigitNumber(limitNumberToRange(document.getElementById(`startMinute.${i}`).value, 0, 60))
     const endHour = getTwoDigitNumber(limitNumberToRange(document.getElementById(`endHour.${i}`).value, 0, 24))
@@ -177,11 +192,19 @@ function generateTimes() {
   return jsonTimes.slice(0, -1)
 }
 function generateLessons() {
-
+  let jsonLessons = ""
+  for (let i = 0; i < frameLessons.childElementCount; i++) {
+    const lessonTitle = document.getElementById(`lessonTitle.${i}`).value
+    const lessonRoom = document.getElementById(`lessonRoom.${i}`).value
+    const lessonTeacher = document.getElementById(`lessonTeacher.${i}`).value
+    const lessonCopies = document.getElementById(`lessonCopies.${i}`).value
+    jsonLessons += `\n    [ "${lessonTitle}", "${lessonRoom}", "${lessonTeacher}", "${lessonCopies}" ],`
+  }
+  return jsonLessons.slice(0, -1)
 }
 function generateJson() {
   const jsonTimes = generateTimes()
-  const jsonLessons = "\n    []"
+  const jsonLessons = generateLessons()
   const jsonEven = "\n    []"
   const jsonOdd = "\n    []"
 
