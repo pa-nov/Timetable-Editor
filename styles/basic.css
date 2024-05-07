@@ -1,0 +1,35 @@
+﻿.frame {
+  background-color: var(--item);
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.view {
+  background: none;
+  display: flex;
+  height: 90%;
+  border-radius: 0;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 32px;
+  align-items: start;
+  justify-content: safe center;
+}
+
+.navigation-bar {
+  background-color: var(--black);
+  display: flex;
+  height: 10%;
+  border-radius: 0;
+}
+
+.main {
+  background: none;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  row-gap: 0;
+}

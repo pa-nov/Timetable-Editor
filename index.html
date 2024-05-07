@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="styles/styles.css" />
+  <link rel="stylesheet" type="text/css" href="styles/basic.css" />
+  <link rel="stylesheet" type="text/css" href="styles/modifiers.css" />
+  <link rel="stylesheet" type="text/css" href="styles/elements.css" />
+  <script src="scripts/functions.js"></script>
+  <title>Timetable Creator</title>
+
+</head>
+<body>
+
+  <div class="center" id="window-start" style="display: flex">
+    <div class="frame">
+      <button id="button-create">Создать</button>
+      <div class="center-horizontal">или</div>
+      <textarea class="json" id="input-json" placeholder="Расписание (JSON)"></textarea>
+      <button id="button-open">Открыть</button>
+    </div>
+  </div>
+
+  <div class="main" id="window-main" style="display: none">
+    <div class="navigation-bar">
+      <div class="center">
+        <button class="not-selected" id="button-times">Время</button>
+        <button class="not-selected" id="button-lessons">Предметы</button>
+        <button class="not-selected" id="button-timetable">Расписание</button>
+        <button class="not-selected" id="button-json">Json</button>
+      </div>
+    </div>
+    <div class="view">
+
+      <div class="frame" id="frame-times" style="display: none">
+
+        <div class="center-vertical">
+          <div class="center-horizontal fill">Кол-во предметов</div>
+          <div class="center-horizontal fill">Первый номер</div>
+        </div>
+        <div class="center-vertical">
+          <input class="fill" id="input-times-count" type="number" oninput="checkNumberInput(this, 1, 24)" value="01" />
+          <input class="fill" id="input-initial-index" type="number" oninput="checkNumberInput(this, 0, 20)" value="01" />
+        </div>
+
+        <table class="border" style="width: 720px">
+          <thead>
+            <tr>
+              <th>Номер</th>
+              <th>Час</th>
+              <th>Минута</th>
+              <th>Час</th>
+              <th>Минута</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="row-times" style="display: none">
+              <td><input class="fill" disabled="disabled" value="-1" /></td>
+              <td><input class="fill" type="number" oninput="checkNumberInput(this, 0, 23)" value="12" /></td>
+              <td><input class="fill" type="number" oninput="checkNumberInput(this, 0, 59)" value="00" /></td>
+              <td><input class="fill" type="number" oninput="checkNumberInput(this, 0, 23)" value="12" /></td>
+              <td><input class="fill" type="number" oninput="checkNumberInput(this, 0, 59)" value="00" /></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+      <div class="frame" id="frame-lessons" style="display: none">
+        <div class="center-horizontal">Lessons</div>
+        <input />
+        <button>Button</button>
+      </div>
+
+      <div class="frame" id="frame-timetable" style="display: none">
+        <div class="center-horizontal">Timetable</div>
+        <input />
+        <button>Button</button>
+      </div>
+
+      <div class="frame" id="frame-json" style="display: none">
+        <textarea class="json-text" id="text-json"></textarea>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="scripts/times.js"></script>
+  <script src="scripts/lessons.js"></script>
+  <script src="scripts/timetable.js"></script>
+  <script src="scripts/json.js"></script>
+  <script src="scripts/app.js"></script>
+
+</body>
+</html>

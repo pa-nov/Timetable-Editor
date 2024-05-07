@@ -1,0 +1,24 @@
+﻿.json {
+  height: 640px;
+  width: 480px;
+  font-family: "Cascadia Code";
+  font-size: 16px;
+  padding: 16px;
+  resize: none;
+}
+
+.json-text {
+  height: 720px;
+  width: 540px;
+  background-color: var(--item);
+  font-family: "Cascadia Code";
+  font-size: 16px;
+  border-radius: 0;
+  resize: none;
+}
+
+.not-selected {
+  background-color: var(--item);
+  color: var(--title);
+  font-weight: normal;
+}
