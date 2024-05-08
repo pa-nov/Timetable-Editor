@@ -1,4 +1,4 @@
-const timesRow = document.getElementById("row-times")
+const rowTime = document.getElementById("row-time")
 let timesRows = []
 
 function resizeTimes() {
@@ -8,10 +8,10 @@ function resizeTimes() {
     timesRows.pop().remove()
   }
   while (timesCount > timesRows.length) {
-    let newRow = timesRow.cloneNode(true)
+    let newRow = rowTime.cloneNode(true)
     newRow.removeAttribute("id")
     newRow.removeAttribute("style")
-    timesRow.parentNode.appendChild(newRow)
+    rowTime.parentNode.appendChild(newRow)
     timesRows.push(newRow)
   }
 
