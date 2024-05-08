@@ -1,61 +1,24 @@
-﻿:root {
-  --black: #000000;
-  --white: #FFFFFF;
-  --yellow: #FBBC05;
-  --red: #EA4335;
-  --green: #34A853;
-  --blue: #4285F4;
-  --background: #101010;
-  --accent: #FBBC05;
-  --title: #808080;
-  --text: #FFFFFF;
-  --item: #202020;
+﻿.json-input {
+  height: 640px;
+  width: 480px;
+  font-family: "Cascadia Code";
+  font-size: 16px;
+  padding: 16px;
+  resize: none;
 }
 
-* {
-  background-color: var(--background);
-  color: var(--text);
-  font-family: "Roboto";
-  font-size: 32px;
-  border-collapse: collapse;
-  border-radius: 24px;
-  border-width: 0;
-  column-gap: 16px;
-  row-gap: 16px;
-  outline: none;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+.json-text {
+  background: none;
+  height: 720px;
+  width: 540px;
+  font-family: "Cascadia Code";
+  font-size: 16px;
+  border-radius: 0;
+  resize: none;
 }
 
-input::-webkit-inner-spin-button {
-  display: none
-}
-
-html {
-  height: 100%;
-  width: 100%;
-}
-
-body {
-  display: flex;
-  height: 100%;
-  width: 100%;
-}
-
-div {
-  display: flex;
-}
-
-button {
-  background-color: var(--accent);
-  color: var(--item);
-  font-weight: bold;
-  padding: 8px;
-}
-
-input {
-  font-size: 24px;
-  padding: 8px;
-  text-align: center;
+.not-selected {
+  background-color: var(--item);
+  color: var(--title);
+  font-weight: normal;
 }

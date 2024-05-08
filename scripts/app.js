@@ -1,19 +1,33 @@
-const frames = ["times", "lessons", "timetable", "json"]
+const buttons = [
+  document.getElementById("button-times"),
+  document.getElementById("button-lessons"),
+  document.getElementById("button-timetable"),
+  document.getElementById("button-json")
+]
+const frames = [
+  document.getElementById("frame-times"),
+  document.getElementById("frame-lessons"),
+  document.getElementById("frame-timetable"),
+  document.getElementById("frame-json")
+]
+let selectedFrame = -1
 
 function openEditor() {
   document.getElementById("window-start").style.display = "none"
   document.getElementById("window-main").style.display = "flex"
 }
+
 function openFrame(frameIndex) {
   for (let i = 0; i < frames.length; i++) {
     if (i == frameIndex) {
-      document.getElementById("button-" + frames[i]).className = ""
-      document.getElementById("frame-" + frames[i]).style.display = "flex"
+      buttons[i].className = ""
+      frames[i].style.display = "flex"
     } else {
-      document.getElementById("button-" + frames[i]).className = "not-selected"
-      document.getElementById("frame-" + frames[i]).style.display = "none"
+      buttons[i].className = "not-selected"
+      frames[i].style.display = "none"
     }
   }
+  selectedFrame = frameIndex
 }
 
 document.getElementById("button-create").addEventListener("click", () => {
@@ -24,7 +38,7 @@ document.getElementById("button-open").addEventListener("click", () => {
   openEditor()
   openFrame(2)
 })
-document.getElementById("button-times").addEventListener("click", () => { openFrame(0) })
-document.getElementById("button-lessons").addEventListener("click", () => { openFrame(1) })
-document.getElementById("button-timetable").addEventListener("click", () => { openFrame(2) })
-document.getElementById("button-json").addEventListener("click", () => { openFrame(3) })
+buttons[0].addEventListener("click", () => { openFrame(0) })
+buttons[1].addEventListener("click", () => { openFrame(1) })
+buttons[2].addEventListener("click", () => { openFrame(2) })
+buttons[3].addEventListener("click", () => { openFrame(3) })

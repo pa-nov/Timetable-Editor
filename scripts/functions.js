@@ -11,7 +11,7 @@ function checkNumberInput(input, min, max) {
   const number = parseInt(input.value)
 
   if (isNaN(number)) {
-    input.value = min
+    input.value = getTwoDigitNumber(min)
   } else {
     input.value = getTwoDigitNumber(limitNumberToRange(number, min, max))
   }
