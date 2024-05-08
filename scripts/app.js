@@ -20,7 +20,7 @@ function openEditor() {
 function openFrame(frameIndex) {
   for (let i = 0; i < frames.length; i++) {
     if (i == frameIndex) {
-      buttons[i].className = ""
+      buttons[i].className = "selected"
       frames[i].style.display = "flex"
     } else {
       buttons[i].className = "not-selected"

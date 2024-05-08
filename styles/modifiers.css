@@ -8,6 +8,10 @@
   flex: 1;
 }
 
+.show-blur {
+  animation: show-blur 500ms;
+}
+
 .center {
   background: none;
   display: flex;

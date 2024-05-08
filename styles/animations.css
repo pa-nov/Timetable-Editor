@@ -1,0 +1,9 @@
+﻿@keyframes show-blur {
+  from {
+    filter: blur(64px);
+  }
+
+  to {
+    filter: blur(0);
+  }
+}

@@ -17,8 +17,20 @@
   resize: none;
 }
 
+.selected {
+  background-color: var(--accent);
+  color: var(--item);
+  font-weight: bold;
+  transition: all 500ms;
+}
+
 .not-selected {
   background-color: var(--item);
   color: var(--title);
   font-weight: normal;
+  transition: all 500ms;
 }
+
+  .not-selected:hover {
+    color: var(--text);
+  }
