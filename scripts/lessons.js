@@ -32,6 +32,34 @@ function removeLesson(lessonIndex) {
   }
 }
 
+function getLessons() {
+  const lessonsCount = lessonsRows.length
+  let lessons = []
+
+  for (let i = 0; i < lessonsCount; i++) {
+    let lesson = {}
+
+    lesson["title"] = lessonsRows[i].children[1].children[0].value
+    lesson["room"] = lessonsRows[i].children[2].children[0].value
+    lesson["last_name"] = lessonsRows[i].children[3].children[0].value
+    lesson["first_name"] = lessonsRows[i].children[4].children[0].value
+    lesson["middle_name"] = lessonsRows[i].children[5].children[0].value
+    lesson["other"] = []
+
+    let others = lessonsRows[i].children[6].children[0].value.replace(/[^0-9]/gi, " ").replace(/  +/g, " ").split(" ")
+    for (let ii = 0; ii < others.length; ii++) {
+      const other = parseInt(others[ii])
+      if (other > 0) {
+        lesson["other"].push(other)
+      }
+    }
+
+    lessons.push(lesson)
+  }
+
+  return lessons
+}
+
 {
   let newRow = rowLesson.cloneNode(true)
 
