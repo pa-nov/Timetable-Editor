@@ -26,7 +26,7 @@ function updateInitialIndex() {
 }
 
 function getTimes() {
-  const timesCount = parseInt(document.getElementById("input-times-count").value)
+  const timesCount = timesRows.length
   let times = []
 
   for (let i = 0; i < timesCount; i++) {

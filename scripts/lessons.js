@@ -67,11 +67,17 @@ function getLessons() {
   newRow.removeAttribute("style")
   newRow.children[0].children[0].value = "0"
   newRow.children[1].children[0].value = "Null"
+  newRow.children[1].children[0].disabled = "disabled"
   newRow.children[2].children[0].value = "0"
+  newRow.children[2].children[0].disabled = "disabled"
   newRow.children[3].children[0].value = "Null"
+  newRow.children[3].children[0].disabled = "disabled"
   newRow.children[4].children[0].value = "Null"
+  newRow.children[4].children[0].disabled = "disabled"
   newRow.children[5].children[0].value = "Null"
+  newRow.children[5].children[0].disabled = "disabled"
   newRow.children[6].children[0].value = "0, 0"
+  newRow.children[6].children[0].disabled = "disabled"
   newRow.children[7].children[0].innerHTML = ""
 
   rowLesson.parentNode.appendChild(newRow)
