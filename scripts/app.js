@@ -18,6 +18,17 @@ function openEditor() {
 }
 
 function openFrame(frameIndex) {
+  if (frameIndex == 2 && selectedFrame != 2) {
+    resizeTimetable()
+    updateTimetableHead()
+  }
+  if (frameIndex == 3 && selectedFrame != 3) {
+    // Generate JSON
+  }
+  if (selectedFrame == 3 && frameIndex != 3) {
+    // Read JSON
+  }
+
   for (let i = 0; i < frames.length; i++) {
     if (i == frameIndex) {
       buttons[i].className = "selected"

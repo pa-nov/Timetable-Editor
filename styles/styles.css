@@ -10,7 +10,7 @@
 .json-text {
   background: none;
   height: 720px;
-  width: 540px;
+  width: 800px;
   font-family: "Cascadia Code";
   font-size: 16px;
   border-radius: 0;
@@ -36,3 +36,8 @@
   .not-selected:hover {
     color: var(--text);
   }
+
+.week-title {
+  text-orientation: upright;
+  writing-mode: vertical-rl;
+}

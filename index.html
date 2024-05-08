@@ -48,7 +48,7 @@
           <input class="fill" id="input-times-count" type="number" oninput="checkNumberInput(this, 1, 24)" value="01" />
           <input class="fill" id="input-initial-index" type="number" oninput="checkNumberInput(this, 0, 20)" value="01" />
         </div>
-        <table class="border" style="width: 720px">
+        <table class="border" style="width: 800px">
           <thead>
             <tr>
               <th>Номер</th>
@@ -72,7 +72,7 @@
 
       <!-- LESSONS FRAME -->
       <div class="frame show-blur" id="frame-lessons" style="display: none">
-        <table class="border" style="width: 1440px">
+        <table class="border" style="width: 1600px">
           <thead>
             <tr>
               <th style="width: 64px">ID</th>
@@ -103,9 +103,36 @@
 
       <!-- TIMETABLE FRAME -->
       <div class="frame show-blur" id="frame-timetable" style="display: none">
-        <div class="center-horizontal">Timetable</div>
-        <input />
-        <button>Button</button>
+        <table class="border" style="width: 1600px">
+          <thead>
+            <tr id="timetable-head">
+              <th style="width: 64px"></th>
+              <th style="width: 64px"></th>
+            </tr>
+          </thead>
+          <tbody id="timetable-body">
+            <tr>
+              <th class="week-title" rowspan="7">Чётная</th>
+              <th style="height: 96px">Пн</th>
+            </tr>
+            <tr><th style="height: 96px">Вт</th></tr>
+            <tr><th style="height: 96px">Ср</th></tr>
+            <tr><th style="height: 96px">Чт</th></tr>
+            <tr><th style="height: 96px">Пт</th></tr>
+            <tr><th style="height: 96px">Сб</th></tr>
+            <tr><th style="height: 96px">Вс</th></tr>
+            <tr>
+              <th class="week-title" style="border-bottom: 0" rowspan="7">Нечётная</th>
+              <th style="height: 96px">Пн</th>
+            </tr>
+            <tr><th style="height: 96px">Вт</th></tr>
+            <tr><th style="height: 96px">Ср</th></tr>
+            <tr><th style="height: 96px">Чт</th></tr>
+            <tr><th style="height: 96px">Пт</th></tr>
+            <tr><th style="height: 96px">Сб</th></tr>
+            <tr><th style="height: 96px; border-bottom: 0">Вс</th></tr>
+          </tbody>
+        </table>
       </div>
 
       <!-- JSON FRAME -->
