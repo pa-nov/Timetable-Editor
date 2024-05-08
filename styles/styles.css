@@ -20,6 +20,7 @@
 .selected {
   background-color: var(--accent);
   color: var(--item);
+  width: 360px;
   font-weight: bold;
   transition: all 500ms;
 }
@@ -27,6 +28,7 @@
 .not-selected {
   background-color: var(--item);
   color: var(--title);
+  width: 240px;
   font-weight: normal;
   transition: all 500ms;
 }
