@@ -72,9 +72,33 @@
 
       <!-- LESSONS FRAME -->
       <div class="frame show-blur" id="frame-lessons" style="display: none">
-        <div class="center-horizontal">Lessons</div>
-        <input />
-        <button>Button</button>
+        <table class="border" style="width: 1440px">
+          <thead>
+            <tr>
+              <th style="width: 64px">ID</th>
+              <th>Название</th>
+              <th>Кабинет</th>
+              <th>Фамилия</th>
+              <th>Имя</th>
+              <th>Отчество</th>
+              <th>Копии</th>
+              <th style="width: 64px"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="row-lesson" style="display: none">
+              <td><input class="fill" disabled="disabled" value="-1" /></td>
+              <td><input class="fill" /></td>
+              <td><input class="fill" /></td>
+              <td><input class="fill" /></td>
+              <td><input class="fill" /></td>
+              <td><input class="fill" /></td>
+              <td><input class="fill" /></td>
+              <td><button class="center-horizontal" style="color: var(--text)">X</button></td>
+            </tr>
+          </tbody>
+        </table>
+        <button id="button-add-lesson">+</button>
       </div>
 
       <!-- TIMETABLE FRAME -->
