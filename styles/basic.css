@@ -1,8 +1,17 @@
-﻿.frame {
-  background-color: var(--item);
+﻿.main {
+  background: none;
   display: flex;
+  height: 100%;
+  width: 100%;
   flex-direction: column;
-  padding: 16px;
+  row-gap: 0;
+}
+
+.navigation-bar {
+  background-color: var(--black);
+  display: flex;
+  height: 80px;
+  border-radius: 0;
 }
 
 .view {
@@ -17,18 +26,9 @@
   justify-content: safe center;
 }
 
-.navigation-bar {
-  background-color: var(--black);
+.frame {
+  background-color: var(--item);
   display: flex;
-  height: 80px;
-  border-radius: 0;
-}
-
-.main {
-  background: none;
-  display: flex;
-  height: 100%;
-  width: 100%;
   flex-direction: column;
-  row-gap: 0;
+  padding: 16px;
 }
