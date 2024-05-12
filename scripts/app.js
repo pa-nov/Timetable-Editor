@@ -19,8 +19,10 @@ function openEditor() {
 
 function openFrame(frameIndex) {
   if (frameIndex == 2 && selectedFrame != 2) {
+    updateLessonsPopup()
     resizeTimetable()
     updateTimetableHead()
+    updateTimetableBody()
   }
   if (frameIndex == 3 && selectedFrame != 3) {
     // Generate JSON

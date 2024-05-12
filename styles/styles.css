@@ -41,3 +41,29 @@
   text-orientation: upright;
   writing-mode: vertical-rl;
 }
+
+.popup-background {
+  backdrop-filter: brightness(0.1);
+  border-radius: 0;
+  position: fixed;
+  overflow: auto;
+  padding: 32px;
+  inset: 0;
+}
+
+.popup {
+  display: grid;
+  width: 1600px;
+  grid-gap: 16px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.lesson {
+  padding: 16px;
+  flex-direction: column;
+}
+
+.lesson-row {
+  border-radius: 0;
+  justify-content: space-between;
+}

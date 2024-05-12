@@ -1,3 +1,21 @@
+function getShortName(firstName, middleName, lastName) {
+  let shortName = lastName
+
+  if (firstName.length > 0) {
+    shortName += ` ${firstName[0]}.`
+
+    if (middleName.length > 0) {
+      shortName += ` ${middleName[0]}.`
+    }
+  }
+
+  if (shortName.length > 0) {
+    return shortName
+  } else {
+    return "-"
+  }
+}
+
 function getTwoDigitNumber(number) {
   if (number < 10) return `0${number}`
   return number.toString()

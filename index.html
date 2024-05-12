@@ -106,31 +106,31 @@
         <table class="border" style="width: 1600px">
           <thead>
             <tr id="timetable-head">
-              <th style="width: 64px"></th>
-              <th style="width: 64px"></th>
+              <th style="width: 4%"></th>
+              <th style="width: 4%"></th>
             </tr>
           </thead>
           <tbody id="timetable-body">
             <tr>
               <th class="week-title" rowspan="7">Чётная</th>
-              <th style="height: 96px">Пн</th>
+              <th style="height: 120px">Пн</th>
             </tr>
-            <tr><th style="height: 96px">Вт</th></tr>
-            <tr><th style="height: 96px">Ср</th></tr>
-            <tr><th style="height: 96px">Чт</th></tr>
-            <tr><th style="height: 96px">Пт</th></tr>
-            <tr><th style="height: 96px">Сб</th></tr>
-            <tr><th style="height: 96px">Вс</th></tr>
+            <tr><th style="height: 120px">Вт</th></tr>
+            <tr><th style="height: 120px">Ср</th></tr>
+            <tr><th style="height: 120px">Чт</th></tr>
+            <tr><th style="height: 120px">Пт</th></tr>
+            <tr><th style="height: 120px">Сб</th></tr>
+            <tr><th style="height: 120px">Вс</th></tr>
             <tr>
               <th class="week-title" style="border-bottom: 0" rowspan="7">Нечётная</th>
-              <th style="height: 96px">Пн</th>
+              <th style="height: 120px">Пн</th>
             </tr>
-            <tr><th style="height: 96px">Вт</th></tr>
-            <tr><th style="height: 96px">Ср</th></tr>
-            <tr><th style="height: 96px">Чт</th></tr>
-            <tr><th style="height: 96px">Пт</th></tr>
-            <tr><th style="height: 96px">Сб</th></tr>
-            <tr><th style="height: 96px; border-bottom: 0">Вс</th></tr>
+            <tr><th style="height: 120px">Вт</th></tr>
+            <tr><th style="height: 120px">Ср</th></tr>
+            <tr><th style="height: 120px">Чт</th></tr>
+            <tr><th style="height: 120px">Пт</th></tr>
+            <tr><th style="height: 120px">Сб</th></tr>
+            <tr><th style="height: 120px; border-bottom: 0">Вс</th></tr>
           </tbody>
         </table>
       </div>
@@ -141,6 +141,27 @@
       </div>
 
     </div>
+  </div>
+
+  <!-- LESSONS POPUP -->
+  <div class="popup-background center" id="popup-lessons" style="display: none">
+    <div class="popup frame"></div>
+  </div>
+
+  <!-- ELEMENTS -->
+  <div style="display: none">
+
+    <div class="lesson" id="item-lesson">
+      <div class="lesson-row">
+        <div>{title}</div>
+        <div style="color: var(--title)">{id}</div>
+      </div>
+      <div class="lesson-row">
+        <div style="font-size: 24px">{teacher}</div>
+        <div style="font-size: 24px">{room}</div>
+      </div>
+    </div>
+
   </div>
 
   <script src="scripts/times.js"></script>
