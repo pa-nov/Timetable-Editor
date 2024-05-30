@@ -12,8 +12,7 @@ function resizeTimes(timesCount) {
   while (timesCount > timesRows.length) {
     let newRow = rowTime.cloneNode(true)
     newRow.removeAttribute("id")
-    tableTimes.appendChild(newRow)
-    timesRows.push(newRow)
+    timesRows.push(tableTimes.appendChild(newRow))
   }
 
   updateInitialIndex(parseInt(inputInitialIndex.value))

@@ -20,12 +20,12 @@ function addLesson() {
   newRow.children[0].children[0].value = lessonIndex
   newRow.children[7].children[0].addEventListener("click", () => { removeLesson(lessonIndex) })
 
-  tableLessons.appendChild(newRow)
-  lessonsRows.push(newRow)
+  lessonsRows.push(tableLessons.appendChild(newRow))
 }
 
 function removeLesson(lessonIndex) {
   lessonsRows.splice(lessonIndex, 1)[0].remove()
+
   for (let index = lessonIndex; index < lessonsRows.length; index++) {
     lessonsRows[index].children[0].children[0].value = index
     lessonsRows[index].children[7].children[0].replaceWith(lessonsRows[index].children[7].children[0].cloneNode(true))
@@ -79,8 +79,7 @@ function getLessons() {
   newRow.children[6].children[0].value = "0, 0"
   newRow.children[7].children[0].innerHTML = ""
 
-  tableLessons.appendChild(newRow)
-  lessonsRows.push(newRow)
+  lessonsRows.push(tableLessons.appendChild(newRow))
 }
 
 document.getElementById("button-add-lesson").addEventListener("click", addLesson)

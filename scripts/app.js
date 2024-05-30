@@ -19,17 +19,17 @@ function openEditor() {
 
 function openFrame(frameIndex) {
   if (frameIndex != selectedFrame) {
+    if (selectedFrame == 3) {
+      // Read JSON
+    }
+    if (frameIndex == 3) {
+      // Generate JSON
+    }
     if (frameIndex == 2) {
       resizeTimetable()
       updateTimetableHead()
       updateTimetableBody()
       updateLessonsPopup()
-    }
-    if (frameIndex == 3) {
-      // Generate JSON
-    }
-    if (selectedFrame == 3) {
-      // Read JSON
     }
 
     for (let index = 0; index < frames.length; index++) {

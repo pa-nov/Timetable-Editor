@@ -17,8 +17,7 @@ function resizeTimetable() {
   }
 
   while (timesCount > headTimetable.children.length - 2) {
-    const newHead = document.createElement("th")
-    headTimetable.appendChild(newHead)
+    headTimetable.appendChild(document.createElement("th"))
 
     for (let index = 0; index < tableTimetable.children.length; index++) {
       const newBody = document.createElement("td")
@@ -67,6 +66,7 @@ function updateLessonsPopup() {
 
   getLessons().forEach((lesson, index) => {
     const newItem = itemLesson.cloneNode(true)
+
     newItem.removeAttribute("id")
     newItem.children[0].children[0].innerHTML = lesson.title
     newItem.children[0].children[1].innerHTML = index
@@ -76,6 +76,7 @@ function updateLessonsPopup() {
       setLesson(selectedElement, index, lesson)
       popupLessons.style.display = "none"
     })
+
     gridLessons.appendChild(newItem)
   })
 
