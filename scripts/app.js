@@ -19,19 +19,6 @@ function openEditor() {
 
 function openFrame(frameIndex) {
   if (frameIndex != selectedFrame) {
-    if (selectedFrame == 3) {
-      // Read JSON
-    }
-    if (frameIndex == 3) {
-      // Generate JSON
-    }
-    if (frameIndex == 2) {
-      resizeTimetable()
-      updateTimetableHead()
-      updateTimetableBody()
-      updateLessonsPopup()
-    }
-
     for (let index = 0; index < frames.length; index++) {
       if (index == frameIndex) {
         buttons[index].className = "selected"
@@ -40,6 +27,20 @@ function openFrame(frameIndex) {
         buttons[index].className = "not-selected"
         frames[index].style.display = "none"
       }
+    }
+
+    if (selectedFrame == 3) {
+      // Read JSON
+    }
+    if (frameIndex == 3) {
+      resizeTimetable()
+      generateJson()
+    }
+    if (frameIndex == 2) {
+      resizeTimetable()
+      updateTimetableHead()
+      updateTimetableBody()
+      updateLessonsPopup()
     }
 
     selectedFrame = frameIndex
