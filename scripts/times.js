@@ -24,6 +24,28 @@ function updateInitialIndex(initialIndex) {
   })
 }
 
+resizeTimes(parseInt(inputTimesCount.value))
+inputTimesCount.addEventListener("change", () => { resizeTimes(parseInt(inputTimesCount.value)) })
+inputInitialIndex.addEventListener("change", () => { updateInitialIndex(parseInt(inputInitialIndex.value)) })
+
+
+function setTimes(times) {
+  inputTimesCount.value = times.length
+  inputTimesCount.dispatchEvent(new Event("change"))
+
+  timesRows.forEach((row, index) => {
+    row.children[1].children[0].value = times[index]["startHour"]
+    row.children[2].children[0].value = times[index]["startMinute"]
+    row.children[3].children[0].value = times[index]["endHour"]
+    row.children[4].children[0].value = times[index]["endMinute"]
+
+    row.children[1].children[0].dispatchEvent(new Event("change"))
+    row.children[2].children[0].dispatchEvent(new Event("change"))
+    row.children[3].children[0].dispatchEvent(new Event("change"))
+    row.children[4].children[0].dispatchEvent(new Event("change"))
+  })
+}
+
 function getTimes() {
   let times = []
 
@@ -43,7 +65,3 @@ function getTimes() {
 
   return times
 }
-
-resizeTimes(parseInt(inputTimesCount.value))
-inputTimesCount.addEventListener("change", () => { resizeTimes(parseInt(inputTimesCount.value)) })
-inputInitialIndex.addEventListener("change", () => { updateInitialIndex(parseInt(inputInitialIndex.value)) })

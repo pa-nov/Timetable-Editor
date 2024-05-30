@@ -30,7 +30,12 @@ function openFrame(frameIndex) {
     }
 
     if (selectedFrame == 3) {
-      // Read JSON
+      try {
+        const jsonObject = JSON.parse(normalizeJson(textJson.value))
+        setTimes(jsonObject["times"])
+        setLessons(jsonObject["lessons"])
+        setTimetable(jsonObject["even"], jsonObject["odd"])
+      } catch { }
     }
     if (frameIndex == 3) {
       resizeTimetable()
@@ -52,6 +57,8 @@ document.getElementById("button-create").addEventListener("click", () => {
   openFrame(0)
 })
 document.getElementById("button-open").addEventListener("click", () => {
+  textJson.value = document.getElementById("input-json").value
+  selectedFrame = 3
   openEditor()
   openFrame(2)
 })

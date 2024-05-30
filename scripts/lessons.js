@@ -33,6 +33,44 @@ function removeLesson(lessonIndex) {
   }
 }
 
+{
+  let newRow = rowLesson.cloneNode(true)
+
+  newRow.removeAttribute("id")
+  newRow.children[1].children[0].disabled = "disabled"
+  newRow.children[2].children[0].disabled = "disabled"
+  newRow.children[3].children[0].disabled = "disabled"
+  newRow.children[4].children[0].disabled = "disabled"
+  newRow.children[5].children[0].disabled = "disabled"
+  newRow.children[6].children[0].disabled = "disabled"
+
+  newRow.children[0].children[0].value = "0"
+  newRow.children[1].children[0].value = "Null"
+  newRow.children[2].children[0].value = "0"
+  newRow.children[3].children[0].value = "Null"
+  newRow.children[4].children[0].value = "Null"
+  newRow.children[5].children[0].value = "Null"
+  newRow.children[6].children[0].value = "0, 0"
+  newRow.children[7].children[0].innerHTML = ""
+
+  lessonsRows.push(tableLessons.appendChild(newRow))
+}
+
+document.getElementById("button-add-lesson").addEventListener("click", addLesson)
+
+function setLessons(lessons) {
+  resizeLessons(lessons.length)
+
+  lessonsRows.forEach((row, index) => {
+    row.children[1].children[0].value = lessons[index][0]
+    row.children[2].children[0].value = lessons[index][1]
+    row.children[3].children[0].value = lessons[index][2].split("|")[0]
+    row.children[4].children[0].value = lessons[index][2].split("|")[1]
+    row.children[5].children[0].value = lessons[index][2].split("|")[2]
+    row.children[6].children[0].value = lessons[index][3].replace("|", ", ")
+  })
+}
+
 function getLessons() {
   let lessons = []
 
@@ -58,28 +96,3 @@ function getLessons() {
 
   return lessons
 }
-
-{
-  let newRow = rowLesson.cloneNode(true)
-
-  newRow.removeAttribute("id")
-  newRow.children[1].children[0].disabled = "disabled"
-  newRow.children[2].children[0].disabled = "disabled"
-  newRow.children[3].children[0].disabled = "disabled"
-  newRow.children[4].children[0].disabled = "disabled"
-  newRow.children[5].children[0].disabled = "disabled"
-  newRow.children[6].children[0].disabled = "disabled"
-
-  newRow.children[0].children[0].value = "0"
-  newRow.children[1].children[0].value = "Null"
-  newRow.children[2].children[0].value = "0"
-  newRow.children[3].children[0].value = "Null"
-  newRow.children[4].children[0].value = "Null"
-  newRow.children[5].children[0].value = "Null"
-  newRow.children[6].children[0].value = "0, 0"
-  newRow.children[7].children[0].innerHTML = ""
-
-  lessonsRows.push(tableLessons.appendChild(newRow))
-}
-
-document.getElementById("button-add-lesson").addEventListener("click", addLesson)

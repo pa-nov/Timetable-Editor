@@ -98,3 +98,24 @@ function setLesson(lessonElement, lessonId, lessonData) {
     lessonElement.children[0].children[1].children[1].innerHTML = ""
   }
 }
+
+function setTimetable(even, odd) {
+  resizeTimetable()
+  const timesCount = headTimetable.children.length - 2
+
+  for (let day = 0; day < 7; day++) {
+    for (let lesson = 0; lesson < timesCount; lesson++) {
+      const column = lesson + tableTimetable.children[day].children.length - timesCount
+      const lessonElement = tableTimetable.children[day].children[column]
+      lessonElement.dataset.id = even[day][lesson]
+    }
+  }
+
+  for (let day = 7; day < 14; day++) {
+    for (let lesson = 0; lesson < timesCount; lesson++) {
+      const column = lesson + tableTimetable.children[day].children.length - timesCount
+      const lessonElement = tableTimetable.children[day].children[column]
+      lessonElement.dataset.id = odd[day - 7][lesson]
+    }
+  }
+}
