@@ -83,13 +83,8 @@ input {
 }
 
 textarea {
-  background-color: var(--color-background);
-  width: 640px;
-  height: 640px;
-  border-radius: var(--radius-normal);
   font-family: "Cascadia Mono", monospace;
   font-size: 16px;
-  padding: var(--gap-normal);
   resize: none;
 }
 

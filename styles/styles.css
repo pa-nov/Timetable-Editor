@@ -2,7 +2,6 @@
   display: flex;
   height: 100%;
   width: 100%;
-  flex-direction: row;
   align-items: safe center;
   justify-content: safe center;
   overflow: auto;
@@ -14,6 +13,14 @@
   width: 100%;
   flex-direction: column;
   gap: 0;
+}
+
+#input-json {
+  background-color: var(--color-background);
+  width: 640px;
+  height: 640px;
+  border-radius: var(--radius-normal);
+  padding: var(--gap-normal);
 }
 
 #grid-times {
