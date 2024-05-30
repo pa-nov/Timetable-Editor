@@ -4,11 +4,9 @@
 <head>
 
   <meta charset="utf-8" />
-  <link rel="stylesheet" type="text/css" href="styles/colors.css" />
-  <link rel="stylesheet" type="text/css" href="styles/animations.css" />
+  <link rel="stylesheet" type="text/css" href="styles/root.css" />
+  <link rel="stylesheet" type="text/css" href="styles/base.css" />
   <link rel="stylesheet" type="text/css" href="styles/elements.css" />
-  <link rel="stylesheet" type="text/css" href="styles/modifiers.css" />
-  <link rel="stylesheet" type="text/css" href="styles/basic.css" />
   <link rel="stylesheet" type="text/css" href="styles/styles.css" />
   <script src="scripts/functions.js"></script>
   <title>Timetable Creator</title>
@@ -16,39 +14,40 @@
 </head>
 <body>
 
-  <!-- START WINDOWS -->
-  <div class="center" id="window-start" style="display: flex">
-    <div class="frame">
+  <!-- START VIEW -->
+  <div id="view-start" style="display: flex">
+
+    <section>
       <button id="button-create">Создать</button>
-      <div class="center-horizontal">или</div>
-      <textarea class="json-input" id="input-json" placeholder="Расписание (JSON)"></textarea>
+      <p>или</p>
+      <textarea id="input-json" placeholder="Расписание (JSON)"></textarea>
       <button id="button-open">Открыть</button>
-    </div>
+    </section>
+
   </div>
 
-  <!-- MAIN WINDOWS -->
-  <div class="main" id="window-main" style="display: none">
-    <div class="navigation-bar">
-      <div class="center">
-        <button class="not-selected" id="button-times">Время</button>
-        <button class="not-selected" id="button-lessons">Предметы</button>
-        <button class="not-selected" id="button-timetable">Расписание</button>
-        <button class="not-selected" id="button-json">Json</button>
-      </div>
-    </div>
-    <div class="view">
+  <!-- MAIN VIEW -->
+  <div id="view-main" style="display: none">
+
+    <!-- NAVIGATION BAR -->
+    <nav>
+      <button id="button-times">Время</button>
+      <button id="button-lessons">Предметы</button>
+      <button id="button-timetable">Расписание</button>
+      <button id="button-json">Json</button>
+    </nav>
+
+    <main>
 
       <!-- TIMES FRAME -->
-      <div class="frame show" id="frame-times" style="display: none">
-        <div class="center-vertical">
-          <div class="center-horizontal fill">Кол-во предметов</div>
-          <div class="center-horizontal fill">Первый номер</div>
+      <section id="frame-times" style="width: 800px; display: none">
+        <div id="grid-times">
+          <p>Кол-во предметов</p>
+          <p>Первый номер</p>
+          <input id="input-times-count" value="01" type="number" onchange="checkNumberInput(this, 1, 24)" />
+          <input id="input-initial-index" value="01" type="number" onchange="checkNumberInput(this, 0, 24)" />
         </div>
-        <div class="center-vertical">
-          <input class="fill" id="input-times-count" type="number" oninput="checkNumberInput(this, 1, 24)" value="01" />
-          <input class="fill" id="input-initial-index" type="number" oninput="checkNumberInput(this, 0, 20)" value="01" />
-        </div>
-        <table class="border" style="width: 800px">
+        <table>
           <thead>
             <tr>
               <th>Номер</th>
@@ -58,21 +57,13 @@
               <th>Минута</th>
             </tr>
           </thead>
-          <tbody>
-            <tr id="row-time" style="display: none">
-              <td><input class="fill" disabled="disabled" value="-1" /></td>
-              <td><input class="fill" type="number" oninput="checkNumberInput(this, 0, 23)" value="12" /></td>
-              <td><input class="fill" type="number" oninput="checkNumberInput(this, 0, 59)" value="00" /></td>
-              <td><input class="fill" type="number" oninput="checkNumberInput(this, 0, 23)" value="12" /></td>
-              <td><input class="fill" type="number" oninput="checkNumberInput(this, 0, 59)" value="00" /></td>
-            </tr>
-          </tbody>
+          <tbody id="table-times-body"></tbody>
         </table>
-      </div>
+      </section>
 
       <!-- LESSONS FRAME -->
-      <div class="frame show" id="frame-lessons" style="display: none">
-        <table class="border" style="width: 1600px">
+      <section id="frame-lessons" style="width: 1600px; display: none">
+        <table>
           <thead>
             <tr>
               <th style="width: 64px">ID</th>
@@ -85,89 +76,102 @@
               <th style="width: 64px"></th>
             </tr>
           </thead>
-          <tbody>
-            <tr id="row-lesson" style="display: none">
-              <td><input class="fill" disabled="disabled" value="-1" /></td>
-              <td><input class="fill" /></td>
-              <td><input class="fill" /></td>
-              <td><input class="fill" /></td>
-              <td><input class="fill" /></td>
-              <td><input class="fill" /></td>
-              <td><input class="fill" /></td>
-              <td><button class="center-horizontal" style="color: var(--text)">X</button></td>
-            </tr>
-          </tbody>
+          <tbody id="table-lessons-body"></tbody>
         </table>
         <button id="button-add-lesson">+</button>
-      </div>
+      </section>
 
       <!-- TIMETABLE FRAME -->
-      <div class="frame show" id="frame-timetable" style="display: none">
-        <table class="border" style="width: 1600px">
+      <section id="frame-timetable" style="min-width: 1600px; display: none">
+        <table>
           <thead>
-            <tr id="timetable-head">
-              <th style="width: 4%"></th>
-              <th style="width: 4%"></th>
+            <tr id="table-timetable-head">
+              <th style="width: 64px"></th>
+              <th style="width: 64px"></th>
             </tr>
           </thead>
-          <tbody id="timetable-body">
+          <tbody id="table-timetable-body">
             <tr>
-              <th class="week-title" rowspan="7">Чётная</th>
-              <th style="height: 120px">Пн</th>
+              <th class="text-upright" rowspan="7">Чётная</th>
+              <th>Пн</th>
             </tr>
-            <tr><th style="height: 120px">Вт</th></tr>
-            <tr><th style="height: 120px">Ср</th></tr>
-            <tr><th style="height: 120px">Чт</th></tr>
-            <tr><th style="height: 120px">Пт</th></tr>
-            <tr><th style="height: 120px">Сб</th></tr>
-            <tr><th style="height: 120px">Вс</th></tr>
+            <tr><th>Вт</th></tr>
+            <tr><th>Ср</th></tr>
+            <tr><th>Чт</th></tr>
+            <tr><th>Пт</th></tr>
+            <tr><th>Сб</th></tr>
+            <tr><th>Вс</th></tr>
             <tr>
-              <th class="week-title" style="border-bottom: 0" rowspan="7">Нечётная</th>
-              <th style="height: 120px">Пн</th>
+              <th class="text-upright" style="border-bottom: 0" rowspan="7">Нечётная</th>
+              <th>Пн</th>
             </tr>
-            <tr><th style="height: 120px">Вт</th></tr>
-            <tr><th style="height: 120px">Ср</th></tr>
-            <tr><th style="height: 120px">Чт</th></tr>
-            <tr><th style="height: 120px">Пт</th></tr>
-            <tr><th style="height: 120px">Сб</th></tr>
-            <tr><th style="height: 120px; border-bottom: 0">Вс</th></tr>
+            <tr><th>Вт</th></tr>
+            <tr><th>Ср</th></tr>
+            <tr><th>Чт</th></tr>
+            <tr><th>Пт</th></tr>
+            <tr><th>Сб</th></tr>
+            <tr><th style="border-bottom: 0">Вс</th></tr>
           </tbody>
         </table>
-      </div>
+      </section>
 
       <!-- JSON FRAME -->
-      <div class="frame show" id="frame-json" style="display: none">
-        <textarea class="json-text" id="text-json"></textarea>
-      </div>
+      <section id="frame-json" style="display: none">
+        Json
+      </section>
 
-    </div>
+    </main>
+
   </div>
 
   <!-- LESSONS POPUP -->
-  <div class="popup-background center" id="popup-lessons" style="display: none">
-    <div class="popup frame"></div>
+  <div id="popup-lessons" style="display: none">
+    <section></section>
   </div>
 
   <!-- ELEMENTS -->
   <div style="display: none">
 
-    <div class="lesson" id="item-lesson">
-      <div class="lesson-row">
-        <div>{title}</div>
-        <div style="color: var(--title)">{id}</div>
+    <table>
+      <tr id="row-time">
+        <td><input value="-1" disabled /></td>
+        <td><input value="12" type="number" onchange="checkNumberInput(this, 0, 23)" /></td>
+        <td><input value="00" type="number" onchange="checkNumberInput(this, 0, 59)" /></td>
+        <td><input value="12" type="number" onchange="checkNumberInput(this, 0, 23)" /></td>
+        <td><input value="00" type="number" onchange="checkNumberInput(this, 0, 59)" /></td>
+      </tr>
+    </table>
+
+    <table>
+      <tr id="row-lesson">
+        <td><input value="-1" disabled /></td>
+        <td><input /></td>
+        <td><input /></td>
+        <td><input /></td>
+        <td><input /></td>
+        <td><input /></td>
+        <td><input /></td>
+        <td><button class="button-text">X</button></td>
+      </tr>
+    </table>
+
+    <article id="item-lesson">
+      <div>
+        <p>{title}</p>
+        <p>{id}</p>
       </div>
-      <div class="lesson-row">
-        <div style="font-size: 24px">{teacher}</div>
-        <div style="font-size: 24px">{room}</div>
+      <div>
+        <p>{teacher}</p>
+        <p>{room}</p>
       </div>
-    </div>
+    </article>
 
   </div>
 
+  <!-- SCRIPTS -->
   <script src="scripts/times.js"></script>
   <script src="scripts/lessons.js"></script>
   <script src="scripts/timetable.js"></script>
-  <script src="scripts/json.js"></script>
   <script src="scripts/app.js"></script>
 
 </body>

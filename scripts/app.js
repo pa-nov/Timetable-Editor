@@ -13,34 +13,37 @@ const frames = [
 let selectedFrame = -1
 
 function openEditor() {
-  document.getElementById("window-start").style.display = "none"
-  document.getElementById("window-main").style.display = "flex"
+  document.getElementById("view-start").style.display = "none"
+  document.getElementById("view-main").style.display = "flex"
 }
 
 function openFrame(frameIndex) {
-  if (frameIndex == 2 && selectedFrame != 2) {
-    updateLessonsPopup()
-    resizeTimetable()
-    updateTimetableHead()
-    updateTimetableBody()
-  }
-  if (frameIndex == 3 && selectedFrame != 3) {
-    // Generate JSON
-  }
-  if (selectedFrame == 3 && frameIndex != 3) {
-    // Read JSON
-  }
-
-  for (let i = 0; i < frames.length; i++) {
-    if (i == frameIndex) {
-      buttons[i].className = "selected"
-      frames[i].style.display = "flex"
-    } else {
-      buttons[i].className = "not-selected"
-      frames[i].style.display = "none"
+  if (frameIndex != selectedFrame) {
+    if (frameIndex == 2) {
+      resizeTimetable()
+      updateTimetableHead()
+      updateTimetableBody()
+      updateLessonsPopup()
     }
+    if (frameIndex == 3) {
+      // Generate JSON
+    }
+    if (selectedFrame == 3) {
+      // Read JSON
+    }
+
+    for (let index = 0; index < frames.length; index++) {
+      if (index == frameIndex) {
+        buttons[index].className = "selected"
+        frames[index].style.display = "flex"
+      } else {
+        buttons[index].className = "not-selected"
+        frames[index].style.display = "none"
+      }
+    }
+
+    selectedFrame = frameIndex
   }
-  selectedFrame = frameIndex
 }
 
 document.getElementById("button-create").addEventListener("click", () => {

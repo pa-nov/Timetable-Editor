@@ -1,69 +1,68 @@
-﻿.json-input {
-  height: 640px;
-  width: 480px;
-  font-family: "Cascadia Code";
-  font-size: 16px;
-  padding: 16px;
-  resize: none;
+﻿#view-start {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: row;
+  align-items: safe center;
+  justify-content: safe center;
+  overflow: auto;
 }
 
-.json-text {
-  background: none;
-  height: 720px;
-  width: 800px;
-  font-family: "Cascadia Code";
-  font-size: 16px;
-  border-radius: 0;
-  resize: none;
+#view-main {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  gap: 0;
 }
 
-.selected {
-  background-color: var(--accent);
-  color: var(--item);
-  width: 360px;
-  font-weight: bold;
-  transition: all 500ms;
+#grid-times {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
 
-.not-selected {
-  background-color: var(--item);
-  color: var(--title);
-  width: 240px;
-  font-weight: normal;
-  transition: all 500ms;
+#popup-lessons {
+  backdrop-filter: brightness(0.1);
+  display: flex;
+  align-items: safe center;
+  justify-content: safe center;
+  position: fixed;
+  overflow: auto;
+  inset: 0;
 }
 
-  .not-selected:hover {
-    color: var(--text);
+  #popup-lessons section {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
   }
 
-.week-title {
+.button-text {
+  background: none;
+  color: var(--text);
+  height: 100%;
+  width: 100%;
+  padding: 0;
+}
+
+.text-upright {
   text-orientation: upright;
   writing-mode: vertical-rl;
 }
 
-.popup-background {
-  backdrop-filter: brightness(0.1);
-  border-radius: 0;
-  position: fixed;
-  overflow: auto;
-  padding: 32px;
-  inset: 0;
+.selected {
+  background-color: var(--color-accent);
+  color: var(--color-background);
+  width: 360px;
+  font-weight: bold;
 }
 
-.popup {
-  display: grid;
-  width: 1600px;
-  grid-gap: 16px;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+.not-selected {
+  background-color: var(--color-item);
+  color: var(--color-title);
+  width: 240px;
+  font-weight: normal;
 }
 
-.lesson {
-  padding: 16px;
-  flex-direction: column;
-}
-
-.lesson-row {
-  border-radius: 0;
-  justify-content: space-between;
-}
+  .not-selected:hover {
+    color: var(--color-text);
+  }

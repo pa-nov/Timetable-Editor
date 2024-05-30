@@ -1,96 +1,91 @@
-const timetableHead = document.getElementById("timetable-head")
-const timetableBody = document.getElementById("timetable-body")
-const lessonsPopup = document.getElementById("popup-lessons")
-const lessonsGrid = lessonsPopup.children[0]
-const lessonItem = document.getElementById("item-lesson")
-let selectedLesson
+const headTimetable = document.getElementById("table-timetable-head")
+const tableTimetable = document.getElementById("table-timetable-body")
+const popupLessons = document.getElementById("popup-lessons")
+const gridLessons = popupLessons.children[0]
+const itemLesson = document.getElementById("item-lesson")
+let selectedElement
 
 function resizeTimetable() {
   const timesCount = timesRows.length
-  const initialIndex = parseInt(document.getElementById("input-initial-index").value)
 
-  while (timesCount < timetableHead.children.length - 2) {
-    timetableHead.lastChild.remove()
-    for (let i = 0; i < timetableBody.children.length; i++) {
-      timetableBody.children[i].lastChild.remove()
+  while (timesCount < headTimetable.children.length - 2) {
+    headTimetable.lastChild.remove()
+
+    for (let index = 0; index < tableTimetable.children.length; index++) {
+      tableTimetable.children[index].lastChild.remove()
     }
   }
-  while (timesCount > timetableHead.children.length - 2) {
-    const newHead = document.createElement("th")
-    newHead.innerHTML = initialIndex + timetableHead.children.length - 2
-    timetableHead.appendChild(newHead)
 
-    for (let i = 0; i < timetableBody.children.length; i++) {
+  while (timesCount > headTimetable.children.length - 2) {
+    const newHead = document.createElement("th")
+    headTimetable.appendChild(newHead)
+
+    for (let index = 0; index < tableTimetable.children.length; index++) {
       const newBody = document.createElement("td")
       newBody.dataset.id = "0"
       newBody.addEventListener("click", () => {
-        selectedLesson = newBody
-        lessonsPopup.removeAttribute("style")
+        selectedElement = newBody
+        popupLessons.removeAttribute("style")
       })
 
-      const newItem = lessonItem.cloneNode(true)
+      const newItem = itemLesson.cloneNode(true)
       newItem.removeAttribute("id")
+      newItem.children[0].children[1].innerHTML = ""
       newBody.appendChild(newItem)
 
-      timetableBody.children[i].appendChild(newBody)
+      tableTimetable.children[index].appendChild(newBody)
     }
-  }
-  for (let i = 2; i < timetableHead.children.length; i++) {
-    timetableHead.children[i].style.width = `${92 / timesCount}%`
   }
 }
 
 function updateTimetableHead() {
-  const initialIndex = parseInt(document.getElementById("input-initial-index").value)
+  const initialIndex = parseInt(inputInitialIndex.value)
 
-  for (let i = 2; i < timetableHead.children.length; i++) {
-    timetableHead.children[i].innerHTML = initialIndex + i - 2
+  for (let index = 2; index < headTimetable.children.length; index++) {
+    headTimetable.children[index].innerHTML = initialIndex + index - 2
   }
 }
 
 function updateTimetableBody() {
-  const timesCount = timetableHead.children.length - 2
+  const timesCount = headTimetable.children.length - 2
   const lessons = getLessons()
 
-  for (let row = 0; row < timetableBody.children.length; row++) {
+  for (let row = 0; row < tableTimetable.children.length; row++) {
     for (let column = 0; column < timesCount; column++) {
-      const trueColumn = column + timetableBody.children[row].children.length - timesCount
-      const lessonElement = timetableBody.children[row].children[trueColumn]
-      setLesson(lessonElement, lessonElement.dataset.id, lessons[lessonElement.dataset.id])
+      const trueColumn = column + tableTimetable.children[row].children.length - timesCount
+      const lessonElement = tableTimetable.children[row].children[trueColumn]
+      const lessonId = lessonElement.dataset.id
+      setLesson(lessonElement, lessonId, lessons[lessonId])
     }
   }
 }
 
 function updateLessonsPopup() {
-  while (lessonsGrid.children.length > 0) {
-    lessonsGrid.lastChild.remove()
+  while (gridLessons.children.length > 0) {
+    gridLessons.lastChild.remove()
   }
 
-  const lessons = getLessons()
-  for (let i = 0; i < lessons.length; i++) {
-    const lessonIndex = i
-    const lesson = lessons[lessonIndex]
-
-    const newItem = lessonItem.cloneNode(true)
+  getLessons().forEach((lesson, index) => {
+    const newItem = itemLesson.cloneNode(true)
     newItem.removeAttribute("id")
     newItem.children[0].children[0].innerHTML = lesson.title
-    newItem.children[0].children[1].innerHTML = lessonIndex
+    newItem.children[0].children[1].innerHTML = index
     newItem.children[1].children[0].innerHTML = getShortName(lesson.first_name, lesson.middle_name, lesson.last_name)
     newItem.children[1].children[1].innerHTML = `(${lesson.room})`
     newItem.addEventListener("click", () => {
-      setLesson(selectedLesson, lessonIndex, lesson)
+      setLesson(selectedElement, index, lesson)
+      popupLessons.style.display = "none"
     })
-    lessonsGrid.appendChild(newItem)
-  }
+    gridLessons.appendChild(newItem)
+  })
 
-  lessonsGrid.children[0].children[0].children[0].innerHTML = ""
-  lessonsGrid.children[0].children[1].children[0].innerHTML = ""
-  lessonsGrid.children[0].children[1].children[1].innerHTML = ""
+  gridLessons.children[0].children[0].children[0].innerHTML = ""
+  gridLessons.children[0].children[1].children[0].innerHTML = ""
+  gridLessons.children[0].children[1].children[1].innerHTML = ""
 }
 
 function setLesson(lessonElement, lessonId, lessonData) {
   lessonElement.dataset.id = lessonId
-  lessonElement.children[0].children[0].children[1].innerHTML = ""
 
   if (lessonId > 0) {
     lessonElement.children[0].children[0].children[0].innerHTML = lessonData.title
@@ -101,6 +96,4 @@ function setLesson(lessonElement, lessonId, lessonData) {
     lessonElement.children[0].children[1].children[0].innerHTML = ""
     lessonElement.children[0].children[1].children[1].innerHTML = ""
   }
-
-  lessonsPopup.style.display = "none"
 }

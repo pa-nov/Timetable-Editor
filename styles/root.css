@@ -1,0 +1,19 @@
+﻿:root {
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+  --color-yellow: #FBBC05;
+  --color-red: #EA4335;
+  --color-green: #34A853;
+  --color-blue: #4285F4;
+  --color-background: #101010;
+  --color-accent: var(--color-yellow);
+  --color-title: #808080;
+  --color-text: #FFFFFF;
+  --color-item: #202020;
+  --radius-small: 16px;
+  --radius-normal: 24px;
+  --radius-large: 32px;
+  --gap-small: 8px;
+  --gap-normal: 16px;
+  --gap-large: 32px;
+}

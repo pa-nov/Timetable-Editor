@@ -1,9 +1,0 @@
-﻿@keyframes show {
-  from {
-    filter: opacity(0);
-  }
-
-  to {
-    filter: opacity(1);
-  }
-}
