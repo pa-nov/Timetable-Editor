@@ -23,6 +23,11 @@
   padding: var(--gap-normal);
 }
 
+#text-json {
+  background: none;
+  min-height: 480px;
+}
+
 #grid-times {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

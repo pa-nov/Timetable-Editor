@@ -34,3 +34,8 @@ function checkNumberInput(input, min, max) {
     input.value = getTwoDigitNumber(limitNumberToRange(number, min, max))
   }
 }
+
+function resizeTextarea(textarea) {
+  textarea.style.height = "auto"
+  textarea.style.height = `${textarea.scrollHeight}px`
+}
