@@ -29,7 +29,7 @@ function resizeTimetable() {
 
       const newItem = itemLesson.cloneNode(true)
       newItem.removeAttribute("id")
-      newItem.children[0].children[1].innerHTML = ""
+      newItem.children[0].children[1].style.display = "none"
       newBody.appendChild(newItem)
 
       tableTimetable.children[index].appendChild(newBody)

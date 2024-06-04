@@ -91,8 +91,8 @@ textarea {
 article {
   background-color: var(--color-background);
   display: flex;
-  height: 80px;
-  min-width: 240px;
+  height: 96px;
+  width: 320px;
   flex-direction: column;
   justify-content: space-between;
   border-radius: var(--radius-normal);
@@ -108,9 +108,15 @@ article {
 
     article div p {
       width: auto;
-      font-size: 24px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     article div:first-child p:last-child {
-      color: var(--color-title)
+      color: var(--color-title);
+    }
+
+    article div p:last-child {
+      min-width: fit-content;
     }
