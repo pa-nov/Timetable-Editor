@@ -53,7 +53,7 @@ function updateTimetableBody() {
     for (let column = 0; column < timesCount; column++) {
       const trueColumn = column + tableTimetable.children[row].children.length - timesCount
       const lessonElement = tableTimetable.children[row].children[trueColumn]
-      const lessonId = lessonElement.dataset.id
+      const lessonId = lessonElement.dataset.id < lessons.length ? lessonElement.dataset.id : 0
       setLesson(lessonElement, lessonId, lessons[lessonId])
     }
   }

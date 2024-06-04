@@ -31,6 +31,17 @@ function removeLesson(lessonIndex) {
     lessonsRows[index].children[7].children[0].replaceWith(lessonsRows[index].children[7].children[0].cloneNode(true))
     lessonsRows[index].children[7].children[0].addEventListener("click", () => { removeLesson(index) })
   }
+
+  const timesCount = headTimetable.children.length - 2
+  for (let row = 0; row < tableTimetable.children.length; row++) {
+    for (let column = 0; column < timesCount; column++) {
+      const trueColumn = column + tableTimetable.children[row].children.length - timesCount
+      const lessonElement = tableTimetable.children[row].children[trueColumn]
+      const lessonId = lessonElement.dataset.id
+      if (lessonId == lessonIndex) lessonElement.dataset.id = 0
+      if (lessonId > lessonIndex) lessonElement.dataset.id = lessonId - 1
+    }
+  }
 }
 
 {
