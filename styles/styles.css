@@ -38,8 +38,8 @@
 
 #input-json {
   background-color: var(--color-background);
-  width: 640px;
   height: 640px;
+  width: 640px;
   border-radius: var(--radius-normal);
   padding: var(--gap-normal);
 }
