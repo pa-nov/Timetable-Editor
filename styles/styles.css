@@ -15,6 +15,27 @@
   gap: 0;
 }
 
+#frame-json {
+  position: relative;
+}
+
+  #frame-json:hover #button-copy {
+    filter: opacity(0.5);
+  }
+
+    #frame-json:hover #button-copy:hover {
+      filter: opacity(1);
+    }
+
+#button-copy {
+  position: absolute;
+  height: 32px;
+  width: 32px;
+  top: 8px;
+  right: 8px;
+  filter: opacity(0);
+}
+
 #input-json {
   background-color: var(--color-background);
   width: 640px;

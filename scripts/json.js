@@ -61,3 +61,7 @@ function generateJson() {
   textJson.value = jsonString
   resizeTextarea(textJson)
 }
+
+document.getElementById("button-copy").addEventListener("click", () => {
+  navigator.clipboard.writeText(textJson.value)
+})
