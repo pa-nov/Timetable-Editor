@@ -39,9 +39,14 @@ function resizeTimetable() {
 
 function updateTimetableHead() {
   const initialIndex = parseInt(inputInitialIndex.value)
+  const times = getTimes()
 
   for (let index = 2; index < headTimetable.children.length; index++) {
-    headTimetable.children[index].innerHTML = initialIndex + index - 2
+    const time = times[index - 2]
+    headTimetable.children[index].innerHTML =
+      initialIndex + index - 2 + "<br />" +
+      getTwoDigitNumber(time.start.hour) + ":" + getTwoDigitNumber(time.start.minute) + " - " +
+      getTwoDigitNumber(time.end.hour) + ":" + getTwoDigitNumber(time.end.minute)
   }
 }
 
