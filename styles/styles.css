@@ -15,7 +15,21 @@
   gap: 0;
 }
 
+#frame-times {
+  width: 1000px;
+}
+
+  #frame-times div {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+#frame-lessons {
+  width: 1600px;
+}
+
 #frame-json {
+  width: 1000px;
   position: relative;
 }
 
@@ -47,11 +61,6 @@
 #text-json {
   background: none;
   min-height: 480px;
-}
-
-#grid-times {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
 }
 
 #popup-lessons {

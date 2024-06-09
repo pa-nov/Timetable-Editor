@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 
-<html lang="ru" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" style="background-color: #000000">
 <head>
 
   <meta charset="utf-8" />
@@ -41,11 +41,11 @@
     <main>
 
       <!-- TIMES FRAME -->
-      <section id="frame-times" style="width: 800px; display: none">
+      <section id="frame-times" style="display: none">
 
-        <div id="grid-times">
-          <p>Кол-во предметов</p>
-          <p>Первый номер</p>
+        <div>
+          <p>Количество предметов</p>
+          <p>Номер первого предмета</p>
           <input id="input-times-count" value="01" type="number" onchange="checkNumberInput(this, 1, 24)" />
           <input id="input-initial-index" value="01" type="number" onchange="checkNumberInput(this, 0, 24)" />
         </div>
@@ -53,11 +53,11 @@
         <table>
           <thead>
             <tr>
-              <th>Номер</th>
-              <th>Час</th>
-              <th>Минута</th>
-              <th>Час</th>
-              <th>Минута</th>
+              <th>Номер<br />предмета</th>
+              <th>Начало<br />(час)</th>
+              <th>Начало<br />(минута)</th>
+              <th>Конец<br />(час)</th>
+              <th>Конец<br />(минута)</th>
             </tr>
           </thead>
           <tbody id="table-times-body"></tbody>
@@ -66,7 +66,7 @@
       </section>
 
       <!-- LESSONS FRAME -->
-      <section id="frame-lessons" style="width: 1600px; display: none">
+      <section id="frame-lessons" style="display: none">
 
         <table>
           <thead>
@@ -110,7 +110,7 @@
             <tr><th>Сб</th></tr>
             <tr><th>Вс</th></tr>
             <tr>
-              <th class="text-upright" style="border-bottom: 0" rowspan="7">Нечётная</th>
+              <th class="text-upright" rowspan="7" style="border-bottom: 0">Нечётная</th>
               <th>Пн</th>
             </tr>
             <tr><th>Вт</th></tr>
@@ -125,7 +125,7 @@
       </section>
 
       <!-- JSON FRAME -->
-      <section id="frame-json" style="width: 800px; display: none">
+      <section id="frame-json" style="display: none">
         <textarea id="text-json" oninput="resizeTextarea(this)"></textarea>
         <img id="button-copy" src="img/copy.svg" />
       </section>
