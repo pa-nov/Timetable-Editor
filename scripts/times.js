@@ -24,11 +24,6 @@ function updateInitialIndex(initialIndex) {
   })
 }
 
-resizeTimes(parseInt(inputTimesCount.value))
-inputTimesCount.addEventListener("change", () => { resizeTimes(parseInt(inputTimesCount.value)) })
-inputInitialIndex.addEventListener("change", () => { updateInitialIndex(parseInt(inputInitialIndex.value)) })
-
-
 function setTimes(times) {
   inputTimesCount.value = times.length
   inputTimesCount.dispatchEvent(new Event("change"))
@@ -65,3 +60,7 @@ function getTimes() {
 
   return times
 }
+
+resizeTimes(parseInt(inputTimesCount.value))
+inputTimesCount.addEventListener("change", () => { resizeTimes(parseInt(inputTimesCount.value)) })
+inputInitialIndex.addEventListener("change", () => { updateInitialIndex(parseInt(inputInitialIndex.value)) })

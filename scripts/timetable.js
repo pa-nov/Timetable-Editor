@@ -9,17 +9,17 @@ function resizeTimetable() {
   while (timesCount < headTimetable.children.length - 2) {
     headTimetable.lastChild.remove()
 
-    for (let index = 0; index < tableTimetable.children.length; index++) {
-      tableTimetable.children[index].lastChild.remove()
+    for (let row = 0; row < tableTimetable.children.length; row++) {
+      tableTimetable.children[row].lastChild.remove()
     }
   }
 
   while (timesCount > headTimetable.children.length - 2) {
     headTimetable.appendChild(document.createElement("th"))
 
-    for (let index = 0; index < tableTimetable.children.length; index++) {
+    for (let row = 0; row < tableTimetable.children.length; row++) {
       const newBody = document.createElement("td")
-      newBody.dataset.id = "0"
+      newBody.dataset.id = 0
       newBody.addEventListener("click", () => {
         selectedElement = newBody
         popupLessons.removeAttribute("style")
@@ -30,7 +30,7 @@ function resizeTimetable() {
       newItem.children[0].children[1].style.display = "none"
       newBody.appendChild(newItem)
 
-      tableTimetable.children[index].appendChild(newBody)
+      tableTimetable.children[row].appendChild(newBody)
     }
   }
 }
@@ -80,19 +80,19 @@ function setTimetable(even, odd) {
   resizeTimetable()
   const timesCount = headTimetable.children.length - 2
 
-  for (let day = 0; day < 7; day++) {
-    for (let lesson = 0; lesson < timesCount; lesson++) {
-      const column = lesson + tableTimetable.children[day].children.length - timesCount
-      const lessonElement = tableTimetable.children[day].children[column]
-      lessonElement.dataset.id = even[day][lesson] || 0
+  for (let row = 0; row < 7; row++) {
+    for (let column = 0; column < timesCount; column++) {
+      const trueColumn = column + tableTimetable.children[row].children.length - timesCount
+      const lessonElement = tableTimetable.children[row].children[trueColumn]
+      lessonElement.dataset.id = even[row][column] || 0
     }
   }
 
-  for (let day = 7; day < 14; day++) {
-    for (let lesson = 0; lesson < timesCount; lesson++) {
-      const column = lesson + tableTimetable.children[day].children.length - timesCount
-      const lessonElement = tableTimetable.children[day].children[column]
-      lessonElement.dataset.id = odd[day - 7][lesson] || 0
+  for (let row = 7; row < 14; row++) {
+    for (let column = 0; column < timesCount; column++) {
+      const trueColumn = column + tableTimetable.children[row].children.length - timesCount
+      const lessonElement = tableTimetable.children[row].children[trueColumn]
+      lessonElement.dataset.id = odd[row - 7][column] || 0
     }
   }
 }

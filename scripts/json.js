@@ -18,22 +18,26 @@ function generateLessons() {
   let jsonString = ""
 
   getLessons().forEach((lesson) => {
-    jsonString += `    [ "${lesson.title}", "${lesson.room}", "${lesson.last_name}|${lesson.first_name}|${lesson.middle_name}", "${lesson.other.join("|")}" ],\n`
+    const title = lesson.title.trim()
+    const room = lesson.room.trim()
+    const teacher = `${lesson.last_name.trim()}|${lesson.first_name.trim()}|${lesson.middle_name.trim()}`
+    const other = lesson.other.join("|")
+    jsonString += `    [ "${title}", "${room}", "${teacher}", "${other}" ],\n`
   })
 
   return jsonString.slice(0, -2) + "\n"
 }
 
-function generateTimetable(startIndex, endIndex) {
+function generateTimetable(startIndex, length) {
   let jsonString = ""
 
   const timesCount = headTimetable.children.length - 2
-  for (let day = startIndex; day < endIndex + 1; day++) {
+  for (let row = startIndex; row < startIndex + length; row++) {
     jsonString += "    ["
 
-    for (let lesson = 0; lesson < timesCount; lesson++) {
-      const column = lesson + tableTimetable.children[day].children.length - timesCount
-      jsonString += ` ${tableTimetable.children[day].children[column].dataset.id},`
+    for (let column = 0; column < timesCount; column++) {
+      const trueColumn = column + tableTimetable.children[row].children.length - timesCount
+      jsonString += ` ${tableTimetable.children[row].children[trueColumn].dataset.id},`
     }
 
     jsonString = jsonString.slice(0, -1) + " ],\n"
@@ -52,16 +56,14 @@ function generateJson() {
     generateLessons() +
     `  ],\n` +
     `  "even": [\n` +
-    generateTimetable(0, 6) +
+    generateTimetable(0, 7) +
     `  ],\n` +
     `  "odd": [\n` +
-    generateTimetable(7, 13) +
+    generateTimetable(7, 7) +
     `  ]\n` +
     `}`
   textJson.value = jsonString
   resizeTextarea(textJson)
 }
 
-document.getElementById("button-copy").addEventListener("click", () => {
-  navigator.clipboard.writeText(textJson.value)
-})
+document.getElementById("button-copy").addEventListener("click", () => { navigator.clipboard.writeText(textJson.value) })

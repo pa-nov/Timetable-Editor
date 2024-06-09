@@ -15,11 +15,9 @@ function resizeLessons(lessonsCount) {
 function addLesson() {
   const lessonIndex = lessonsRows.length
   let newRow = rowLesson.cloneNode(true)
-
   newRow.removeAttribute("id")
   newRow.children[0].children[0].value = lessonIndex
   newRow.children[7].children[0].addEventListener("click", () => { removeLesson(lessonIndex) })
-
   lessonsRows.push(tableLessons.appendChild(newRow))
 }
 
@@ -43,31 +41,6 @@ function removeLesson(lessonIndex) {
     }
   }
 }
-
-{
-  let newRow = rowLesson.cloneNode(true)
-
-  newRow.removeAttribute("id")
-  newRow.children[1].children[0].disabled = "disabled"
-  newRow.children[2].children[0].disabled = "disabled"
-  newRow.children[3].children[0].disabled = "disabled"
-  newRow.children[4].children[0].disabled = "disabled"
-  newRow.children[5].children[0].disabled = "disabled"
-  newRow.children[6].children[0].disabled = "disabled"
-
-  newRow.children[0].children[0].value = "0"
-  newRow.children[1].children[0].value = "Null"
-  newRow.children[2].children[0].value = "0"
-  newRow.children[3].children[0].value = "Null"
-  newRow.children[4].children[0].value = "Null"
-  newRow.children[5].children[0].value = "Null"
-  newRow.children[6].children[0].value = "0, 0"
-  newRow.children[7].children[0].innerHTML = ""
-
-  lessonsRows.push(tableLessons.appendChild(newRow))
-}
-
-document.getElementById("button-add-lesson").addEventListener("click", addLesson)
 
 function setLessons(lessons) {
   resizeLessons(lessons.length)
@@ -107,3 +80,28 @@ function getLessons() {
 
   return lessons
 }
+
+{
+  let newRow = rowLesson.cloneNode(true)
+
+  newRow.removeAttribute("id")
+  newRow.children[1].children[0].disabled = "disabled"
+  newRow.children[2].children[0].disabled = "disabled"
+  newRow.children[3].children[0].disabled = "disabled"
+  newRow.children[4].children[0].disabled = "disabled"
+  newRow.children[5].children[0].disabled = "disabled"
+  newRow.children[6].children[0].disabled = "disabled"
+
+  newRow.children[0].children[0].value = "0"
+  newRow.children[1].children[0].value = "Null"
+  newRow.children[2].children[0].value = "0"
+  newRow.children[3].children[0].value = "Null"
+  newRow.children[4].children[0].value = "Null"
+  newRow.children[5].children[0].value = "Null"
+  newRow.children[6].children[0].value = "0, 0"
+  newRow.children[7].children[0].innerHTML = ""
+
+  lessonsRows.push(tableLessons.appendChild(newRow))
+}
+
+document.getElementById("button-add-lesson").addEventListener("click", addLesson)
