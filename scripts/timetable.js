@@ -84,7 +84,7 @@ function setTimetable(even, odd) {
     for (let lesson = 0; lesson < timesCount; lesson++) {
       const column = lesson + tableTimetable.children[day].children.length - timesCount
       const lessonElement = tableTimetable.children[day].children[column]
-      lessonElement.dataset.id = even[day][lesson]
+      lessonElement.dataset.id = even[day][lesson] || 0
     }
   }
 
@@ -92,7 +92,7 @@ function setTimetable(even, odd) {
     for (let lesson = 0; lesson < timesCount; lesson++) {
       const column = lesson + tableTimetable.children[day].children.length - timesCount
       const lessonElement = tableTimetable.children[day].children[column]
-      lessonElement.dataset.id = odd[day - 7][lesson]
+      lessonElement.dataset.id = odd[day - 7][lesson] || 0
     }
   }
 }
