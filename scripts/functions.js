@@ -46,6 +46,16 @@ function checkNumberInput(input, min, max) {
   }
 }
 
+function checkFontScale(element) {
+  for (let size = 10; size > 2; size--) {
+    element.style.fontSize = `${size / 10}em`
+    if (
+      element.scrollHeight - element.offsetHeight < 4 &&
+      element.scrollWidth - element.offsetWidth < 4
+    ) break
+  }
+}
+
 function resizeTextarea(textarea) {
   textarea.style.height = "auto"
   textarea.style.height = `${textarea.scrollHeight}px`
