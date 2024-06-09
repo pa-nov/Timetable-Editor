@@ -90,6 +90,13 @@ function updateLessonsPopup() {
   gridLessons.children[0].children[1].children[1].innerHTML = ""
 }
 
+popupLessons.addEventListener("click", (element) => {
+  if (element.target == popupLessons) popupLessons.style.display = "none"
+})
+document.addEventListener("keydown", (event) => {
+  if (event.key == "Escape") popupLessons.style.display = "none"
+})
+
 function setLesson(lessonElement, lessonId, lessonData) {
   lessonElement.dataset.id = lessonId
 
