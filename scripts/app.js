@@ -35,7 +35,10 @@ function openFrame(frameIndex) {
         setTimes(jsonObject["times"])
         setLessons(jsonObject["lessons"])
         setTimetable(jsonObject["even"], jsonObject["odd"])
-      } catch { }
+      } catch (error) {
+        alert(`При чтении JSON произошла ошибка\n(${error})`)
+        console.error(error)
+      }
     }
     if (frameIndex == 3) {
       resizeTimetable()
