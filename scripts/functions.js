@@ -1,19 +1,17 @@
 function getShortName(firstName, middleName, lastName) {
-  let shortName = lastName
+  let shortName = lastName.trim()
 
-  if (firstName.length > 0) {
-    shortName += ` ${firstName[0]}.`
+  if (shortName.length > 0) {
+    if (firstName.trim().length > 0) {
+      shortName += ` ${firstName.trim()[0]}.`
 
-    if (middleName.length > 0) {
-      shortName += ` ${middleName[0]}.`
+      if (middleName.trim().length > 0) {
+        shortName += ` ${middleName.trim()[0]}.`
+      }
     }
   }
 
-  if (shortName.length > 0) {
-    return shortName
-  } else {
-    return "-"
-  }
+  return shortName.length > 0 ? shortName : "Null"
 }
 
 function getTwoDigitNumber(number) {
