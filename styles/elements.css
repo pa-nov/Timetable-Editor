@@ -91,8 +91,8 @@ textarea {
 article {
   background-color: var(--color-background);
   display: flex;
-  height: 96px;
-  width: 320px;
+  height: 100px;
+  width: 360px;
   flex-direction: column;
   justify-content: space-between;
   border-radius: var(--radius-normal);
@@ -102,21 +102,35 @@ article {
 
   article div {
     display: flex;
+    max-height: 50%;
     flex-direction: row;
     justify-content: space-between;
   }
 
     article div p {
       width: auto;
-      white-space: nowrap;
+      text-align: left;
       overflow: hidden;
-      text-overflow: ellipsis;
+      transition: none;
+    }
+
+      article div p:last-child {
+        min-width: fit-content;
+      }
+
+    article div:first-child p:first-child {
+      word-break: break-all;
     }
 
     article div:first-child p:last-child {
       color: var(--color-title);
     }
 
-    article div p:last-child {
-      min-width: fit-content;
+    article div:last-child {
+      align-items: end;
     }
+
+      article div:last-child p {
+        height: fit-content;
+        white-space: nowrap;
+      }

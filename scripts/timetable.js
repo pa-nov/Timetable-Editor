@@ -1,7 +1,6 @@
 const headTimetable = document.getElementById("table-timetable-head")
 const tableTimetable = document.getElementById("table-timetable-body")
 const itemLesson = document.getElementById("item-lesson")
-let selectedElement
 
 function resizeTimetable() {
   const timesCount = timesRows.length
@@ -20,10 +19,7 @@ function resizeTimetable() {
     for (let row = 0; row < tableTimetable.children.length; row++) {
       const newBody = document.createElement("td")
       newBody.dataset.id = 0
-      newBody.addEventListener("click", () => {
-        selectedElement = newBody
-        popupLessons.removeAttribute("style")
-      })
+      newBody.addEventListener("click", () => { openLessonsPopup(newBody) })
 
       const newItem = itemLesson.cloneNode(true)
       newItem.removeAttribute("id")
@@ -69,6 +65,10 @@ function setLesson(lessonElement, lessonId, lessonData) {
     lessonElement.children[0].children[0].children[0].innerHTML = lessonData.title
     lessonElement.children[0].children[1].children[0].innerHTML = getShortName(lessonData.first_name, lessonData.middle_name, lessonData.last_name)
     lessonElement.children[0].children[1].children[1].innerHTML = `(${lessonData.room})`
+
+    if (lessonData.room.length > 4) lessonElement.children[0].children[1].children[1].style.fontSize = "0.7em"
+    checkFontScale(lessonElement.children[0].children[0].children[0])
+    checkFontScale(lessonElement.children[0].children[1].children[0])
   } else {
     lessonElement.children[0].children[0].children[0].innerHTML = ""
     lessonElement.children[0].children[1].children[0].innerHTML = ""

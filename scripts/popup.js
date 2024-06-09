@@ -1,7 +1,9 @@
 const popupLessons = document.getElementById("popup-lessons")
 const gridLessons = popupLessons.children[0]
 
-function updateLessonsPopup() {
+function openLessonsPopup(selectedElement) {
+  popupLessons.removeAttribute("style")
+
   while (gridLessons.children.length > 0) {
     gridLessons.lastChild.remove()
   }
@@ -20,6 +22,10 @@ function updateLessonsPopup() {
     })
 
     gridLessons.appendChild(newItem)
+
+    if (lesson.room.length > 4) newItem.children[1].children[1].style.fontSize = "0.7em"
+    checkFontScale(newItem.children[0].children[0])
+    checkFontScale(newItem.children[1].children[0])
   })
 
   gridLessons.children[0].children[0].children[0].innerHTML = ""

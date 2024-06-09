@@ -48,7 +48,6 @@ function openFrame(frameIndex) {
       resizeTimetable()
       updateTimetableHead()
       updateTimetableBody()
-      updateLessonsPopup()
     }
 
     selectedFrame = frameIndex
