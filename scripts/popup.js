@@ -22,10 +22,7 @@ function openLessonsPopup(selectedElement) {
     })
 
     gridLessons.appendChild(newItem)
-
-    if (lesson.room.length > 4) newItem.children[1].children[1].style.fontSize = "0.7em"
-    checkFontScale(newItem.children[0].children[0])
-    checkFontScale(newItem.children[1].children[0])
+    checkLessonItemSize(newItem)
   })
 
   gridLessons.children[0].children[0].children[0].innerHTML = ""

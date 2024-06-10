@@ -36,6 +36,13 @@ function normalizeJson(jsonText) {
   return jsonString
 }
 
+function scaleFont(element, max, min) {
+  for (let size = max; size > min - 1; size--) {
+    element.style.fontSize = `${size / 10}em`
+    if (element.scrollHeight - element.offsetHeight < 4 && element.scrollWidth - element.offsetWidth < 4) break
+  }
+}
+
 function checkNumberInput(input, min, max) {
   const number = parseInt(input.value)
 
@@ -46,14 +53,10 @@ function checkNumberInput(input, min, max) {
   }
 }
 
-function checkFontScale(element) {
-  for (let size = 10; size > 2; size--) {
-    element.style.fontSize = `${size / 10}em`
-    if (
-      element.scrollHeight - element.offsetHeight < 4 &&
-      element.scrollWidth - element.offsetWidth < 4
-    ) break
-  }
+function checkLessonItemSize(element) {
+  if (element.children[1].children[1].innerHTML.length > 6) element.children[1].children[1].style.fontSize = "0.6em"
+  scaleFont(element.children[1].children[0], 7, 5)
+  scaleFont(element.children[0].children[0], 10, 4)
 }
 
 function resizeTextarea(textarea) {

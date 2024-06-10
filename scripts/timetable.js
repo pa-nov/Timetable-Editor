@@ -23,6 +23,7 @@ function resizeTimetable() {
 
       const newItem = itemLesson.cloneNode(true)
       newItem.removeAttribute("id")
+      newItem.children[0].children[0].style.textAlign = "center"
       newItem.children[0].children[1].style.display = "none"
       newBody.appendChild(newItem)
 
@@ -65,10 +66,7 @@ function setLesson(lessonElement, lessonId, lessonData) {
     lessonElement.children[0].children[0].children[0].innerHTML = lessonData.title
     lessonElement.children[0].children[1].children[0].innerHTML = getShortName(lessonData.first_name, lessonData.middle_name, lessonData.last_name)
     lessonElement.children[0].children[1].children[1].innerHTML = `(${lessonData.room})`
-
-    if (lessonData.room.length > 4) lessonElement.children[0].children[1].children[1].style.fontSize = "0.7em"
-    checkFontScale(lessonElement.children[0].children[0].children[0])
-    checkFontScale(lessonElement.children[0].children[1].children[0])
+    checkLessonItemSize(lessonElement.children[0])
   } else {
     lessonElement.children[0].children[0].children[0].innerHTML = ""
     lessonElement.children[0].children[1].children[0].innerHTML = ""
