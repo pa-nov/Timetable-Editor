@@ -22,7 +22,7 @@ function generateLessons() {
     const room = lesson.room.trim()
     const teacher = `${lesson.last_name.trim()}|${lesson.first_name.trim()}|${lesson.middle_name.trim()}`
     const other = lesson.other.join("|")
-    jsonString += `    [ "${title}", "${room}", "${teacher}", "${other}" ],\n`
+    jsonString += `    [ ${JSON.stringify(title)}, ${JSON.stringify(room)}, ${JSON.stringify(teacher)}, "${other}" ],\n`
   })
 
   return jsonString.slice(0, -2) + "\n"
