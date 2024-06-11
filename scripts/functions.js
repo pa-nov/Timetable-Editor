@@ -23,19 +23,6 @@ function limitNumberToRange(number, min, max) {
   return Math.min(max, Math.max(min, number))
 }
 
-function normalizeJson(jsonText) {
-  const jsonArray = jsonText.split('": 0')
-  let jsonString = jsonArray[0]
-
-  for (let index = 1; index < jsonArray.length; index++) {
-    jsonString += '": '
-    if (jsonArray[index].substring(0, 1) == ",") jsonString += "0"
-    jsonString += jsonArray[index]
-  }
-
-  return jsonString
-}
-
 function scaleFont(element, max, min) {
   for (let size = max; size > min - 1; size--) {
     element.style.fontSize = `${size / 10}em`

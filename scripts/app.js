@@ -31,7 +31,7 @@ function openFrame(frameIndex) {
 
     if (selectedFrame == 3) {
       try {
-        const jsonObject = JSON.parse(normalizeJson(textJson.value))
+        const jsonObject = JSON.parse(textJson.value)
         setTimes(jsonObject["times"])
         setLessons(jsonObject["lessons"])
         setTimetable(jsonObject["even"], jsonObject["odd"])
