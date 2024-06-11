@@ -9,6 +9,7 @@
   padding: 0;
   margin: 0;
   gap: var(--gap-normal);
+  scrollbar-color: var(--color-title) var(--color-background);
   transition: all 250ms;
 }
 
