@@ -64,7 +64,7 @@
 }
 
 #popup-lessons {
-  backdrop-filter: brightness(0.1);
+  background-color: #000000F0;
   display: flex;
   align-items: safe center;
   justify-content: safe center;
