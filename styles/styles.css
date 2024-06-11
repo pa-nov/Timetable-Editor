@@ -78,6 +78,10 @@
     grid-template-columns: repeat(4, 1fr);
   }
 
+  #popup-lessons article:hover {
+    box-shadow: 0 0 12px 2px var(--color-title);
+  }
+
 .button-text {
   background: none;
   color: var(--text);
