@@ -64,7 +64,7 @@
 }
 
 #popup-lessons {
-  backdrop-filter: brightness(0.1);
+  background-color: #000000F0;
   display: flex;
   align-items: safe center;
   justify-content: safe center;
@@ -76,6 +76,10 @@
   #popup-lessons section {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  #popup-lessons article:hover {
+    box-shadow: 0 0 12px 2px var(--color-title);
   }
 
 .button-text {

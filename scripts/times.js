@@ -29,10 +29,10 @@ function setTimes(times) {
   inputTimesCount.dispatchEvent(new Event("change"))
 
   timesRows.forEach((row, index) => {
-    row.children[1].children[0].value = times[index]["startHour"]
-    row.children[2].children[0].value = times[index]["startMinute"]
-    row.children[3].children[0].value = times[index]["endHour"]
-    row.children[4].children[0].value = times[index]["endMinute"]
+    row.children[1].children[0].value = parseInt(times[index][0])
+    row.children[2].children[0].value = parseInt(times[index][1])
+    row.children[3].children[0].value = parseInt(times[index][2])
+    row.children[4].children[0].value = parseInt(times[index][3])
 
     row.children[1].children[0].dispatchEvent(new Event("change"))
     row.children[2].children[0].dispatchEvent(new Event("change"))

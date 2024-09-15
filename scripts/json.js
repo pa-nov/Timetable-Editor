@@ -8,7 +8,7 @@ function generateTimes() {
     const startMinute = getTwoDigitNumber(time.start.minute)
     const endHour = getTwoDigitNumber(time.end.hour)
     const endMinute = getTwoDigitNumber(time.end.minute)
-    jsonString += `    { "startHour": ${startHour}, "startMinute": ${startMinute}, "endHour": ${endHour}, "endMinute": ${endMinute} },\n`
+    jsonString += `    [ "${startHour}", "${startMinute}", "${endHour}", "${endMinute}" ],\n`
   })
 
   return jsonString.slice(0, -2) + "\n"
